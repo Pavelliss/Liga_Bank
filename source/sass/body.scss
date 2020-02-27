@@ -1,0 +1,49 @@
+html {
+  box-sizing: border-box;
+}
+
+.visually-hidden:not(:focus),
+input[type="radio"],
+input[type="checkbox"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  opacity: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+@media (max-width: $mobile-width) {
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-track-piece {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    height: 50px;
+    background-color: $main-color;
+    border-radius: 3px;
+  }
+}

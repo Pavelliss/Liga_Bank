@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Лига Банк</title>
+  <link rel="stylesheet" href="css/style.min.css">
+</head>
+<body>
+  <div style="display: none;">
+    <include src="build/img/sprite_auto.svg"></include>
+  </div>
+  <div class="header">
+    <header class="header__container">
+      <button class="header__button" type="button">
+        <span class="visually-hidden">Открыть, закрыть меню</span>
+      </button>
+      <div class="header__logo">
+        <img src="img/logo.svg" width="149" height="25" alt="Лига Банк">
+      </div>
+      <nav class="nav header__nav">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a href="catalog.html">Услуги</a>
+          </li>
+          <li class="nav__item">
+            <a href="#">Рассчитать кредит</a>
+          </li>
+          <li class="nav__item">
+            <a href="#">Контакты</a>
+          </li>
+          <li class="nav__item">
+            <a href="#">Задать вопрос</a>
+          </li>
+        </ul>
+      </nav>
+      <a class="header__authorized" href="#">
+        <svg width="20" height="22">
+          <use xlink:href="#icon-login"></use>
+        </svg>
+        <span>Войти в Интернет-банк</span>
+      </a>
+    </header>
+  </div>
+
+  <div class="popup popup--login">
+    <div class="popup__background"></div>
+    <div class="popup__wraper">
+      <div class="popup__container">
+        <div class="popup__logo">
+          <img src="img/logo--popup.svg" width="150" height="27" alt="Лига Банк">
+        </div>
+        <button class="popup__button-close">
+          <span class="visually-hidden">Закрыть</span>
+        </button>
+      </div>
+      <div class="popup__form">
+        <form action="#" method="POST">
+          <label>
+            <span>Логин</span>
+            <input id="user-login" type="text" name="user-login" required>
+          </label>
+          <label>
+            <span>Пароль</span>
+            <input id='login-password' type="password" name="user-password" required>
+            <a class="popup__show-pass">
+              <span class="visually-hidden">Показать</span>
+              <svg width="22" height="12">
+                <use xlink:href="#icon-show"></use>
+              </svg>
+            </a>
+          </label>
+          <div class="popup__container-form">
+            <a class="popup__link" href="#">Забыли пароль?</a>
+            <button class="button popup__submit" type="submit">Войти</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+.button {
+  height: 60px;
+
+  font-family: $roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: $gray--lighten;
+
+  border-radius: 4px;
+  background-color: $main-color;
+  transition-duration: 0.3s;
+
+  &:hover,
+  &:focus {
+    opacity: 0.6;
+  }
+
+  &:active {
+    opacity: 0.3;
+  }
+}

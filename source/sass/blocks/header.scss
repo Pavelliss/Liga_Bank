@@ -1,0 +1,169 @@
+.header {
+  padding-top: 26px;
+  padding-bottom: 17px;
+
+  font-family: $roboto;
+  font-size: 16px;
+  line-height: 19px;
+  color: $dark;
+
+  background-color: $gray--lighten;
+}
+
+.header__container {
+  padding: 0 45px;
+  position: relative;
+  display: flex;
+
+  max-width: 1246px;
+  margin: 0 auto;
+}
+
+.header__logo {
+  width: 149px;
+  height: 25px;
+}
+
+.header__authorized {
+  margin-left: auto;
+  margin-right: 3.1%;
+  margin-top: 3px;
+  transition-duration: 0.3s;
+
+  span {
+    display: inline-block;
+    padding-left: 5px;
+    color: $dark;
+  }
+
+  svg {
+    position: relative;
+    top: 5px;
+
+    display: inline-block;
+    fill: $dark;
+  }
+
+  &:hover span,
+  &:focus span {
+    color: $main-color;
+  }
+
+  &:hover svg,
+  &:focus svg {
+    fill: $main-color;
+  }
+
+  &:active {
+    opacity: 0.3;
+  }
+}
+
+.header__button {
+  display: none;
+}
+
+.header__nav {
+  margin-top: 10px;
+  margin-left: 33px;
+}
+
+@media (max-width: $tablet-width) {
+  .header {
+    padding-top: 22px;
+  }
+
+  .header__logo {
+    width: 133px;
+    height: 22px;
+  }
+
+  .header__authorized {
+    margin-top: 0;
+    margin-right: 0;
+
+    span {
+      @include visually-hidden;
+    }
+
+    svg {
+      top: 0;
+    }
+  }
+
+  .header__nav {
+    margin-top: 2px;
+    margin-left: 46px;
+
+    li {
+      margin-left: 20px;
+    }
+  }
+}
+
+@media (max-width: $mobile-width) {
+  .header {
+    padding-top: 10px;
+  }
+
+  .header__container {
+    flex-wrap: wrap;
+    padding: 0 15px;
+  }
+
+  .header__logo {
+    width: 113px;
+    height: 17px;
+    margin-left: 10%;
+  }
+
+  .header__nav {
+    display: none;
+    order: 1;
+    margin-left: 0;
+
+    &--active {
+      display: block;
+    }
+  }
+
+  .header__button {
+    @include position-abs(8px, 15px);
+    width: 16px;
+    height: 14px;
+
+    display: block;
+
+    border: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+
+    &:focus {
+      opacity: 0.6;
+    }
+
+    &:active {
+      opacity: 0.3;
+    }
+
+    &::before {
+      @include position-abs(0, 0);
+      content: "";
+      width: 100%;
+      height: 2px;
+
+      background-color: $dark;
+      border-radius: 1px;
+
+      box-shadow: 0 5px 0 0 $dark, 0 10px 0 0 $dark;
+    }
+  }
+
+  .header__authorized svg {
+    top: 6px;
+
+    width: 14px;
+    height: 16px;
+  }
+}
