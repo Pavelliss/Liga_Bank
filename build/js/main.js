@@ -97,3 +97,11 @@
   popupButtonShowPass.addEventListener('mousedown', onButtonShowPass);
   popupButtonShowPass.addEventListener('mouseup', onButtonHidePass);
 }());
+
+// nav
+const nav = document.querySelector('.header__nav');
+const buttonShowNav = document.querySelector('.header__button');
+
+buttonShowNav.addEventListener('click', function () {
+  nav.classList.toggle('header__nav--active');
+});
