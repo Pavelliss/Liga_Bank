@@ -1,6 +1,6 @@
 .header {
   padding-top: 26px;
-  padding-bottom: 17px;
+  padding-bottom: 16px;
 
   font-family: $roboto;
   font-size: 16px;
@@ -71,6 +71,7 @@
 @media (max-width: $tablet-width) {
   .header {
     padding-top: 22px;
+    padding-bottom: 6px;
   }
 
   .header__logo {
@@ -104,6 +105,7 @@
 @media (max-width: $mobile-width) {
   .header {
     padding-top: 10px;
+    padding-bottom: 18px;
   }
 
   .header__container {
@@ -166,5 +168,9 @@
 
     width: 14px;
     height: 16px;
+  }
+
+  .nojs {
+    display: block;
   }
 }

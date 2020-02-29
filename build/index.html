@@ -31,7 +31,7 @@
       <div class="header__logo">
         <img src="img/logo.svg" width="149" height="25" alt="Лига Банк">
       </div>
-      <nav class="nav header__nav">
+      <nav class="nav header__nav nojs">
         <ul class="nav__list">
           <li class="nav__item">
             <a href="catalog.html">Услуги</a>
@@ -55,6 +55,49 @@
       </a>
     </header>
   </div>
+  <main>
+    <section class="swiper-container main-slider" id="main-slider">
+      <ul class="swiper-wrapper main-slider__list">
+        <li class="swiper-slide main-slider__item main-slider__item--first">
+          <div class="main-slider__container">
+            <div class="main-slider__wrapper">
+              <h1 class="main-slider__title">Лига Банк</h1>
+              <p>Кредиты на любой случай</p>
+              <a class="button main-slider__button main-slider__button--white" href="#">Рассчитать кредит</a>
+            </div>
+            <div class="main-slider__image">
+              <picture>
+                <source type="image/webp" media="(min-width: 768px)" srcset="img/cards@1x.webp 1x, img/cards@2x.webp 2x">
+                <source type="image/webp" srcset="img/black-card@1x.webp 1x, img/black-card@2x.webp 2x">
+                  <!--1x: 398px; 2x: 796px-->
+                <source media="(min-width: 768px)" srcset="img/cards@1x.png 1x, img/cards@2x.png 2x">
+                  <!--1x: 82px; 2x: 164px-->
+                <img src="img/black-card@1x.png" srcset="img/black-card@2x.png 2x" width="82" height="133" alt="Карта Лига Банк">
+              </picture>
+            </div>
+          </div>
+        </li>
+        <li class="swiper-slide main-slider__item main-slider__item--second">
+          <div class="main-slider__container">
+            <div class="main-slider__wrapper">
+              <h2 class="main-slider__title">Лига Банк</h2>
+              <p>Ваша уверенность в завтрашнем дне</p>
+            </div>
+          </div>
+        </li>
+        <li class="swiper-slide main-slider__item main-slider__item--third">
+          <div class="main-slider__container">
+            <div class="main-slider__wrapper">
+              <h2 class="main-slider__title">Лига Банк</h2>
+              <p>Всегда рядом</p>
+              <a class="button main-slider__button" href="#">Найти отделение</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="swiper-pagination main-slider__pagination"></div>
+    </section>
+  </main>
 
   <div class="popup popup--login">
     <div class="popup__background"></div>
@@ -91,6 +134,7 @@
       </div>
     </div>
   </div>
+  <script src="js/sweper.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

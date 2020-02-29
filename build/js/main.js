@@ -1,4 +1,5 @@
 'use strict';
+document.querySelector('.nojs').classList.remove('nojs');
 
 // util
 (function () {
@@ -105,3 +106,31 @@ const buttonShowNav = document.querySelector('.header__button');
 buttonShowNav.addEventListener('click', function () {
   nav.classList.toggle('header__nav--active');
 });
+
+// swiper
+(function (){
+  const DESKTOP_WIDTH = 1200;
+  if (window.innerWidth >= DESKTOP_WIDTH) {
+    let mainSlider = new Swiper('#main-slider', {
+    centeredSlides: true,
+    loop: true,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.main-slider__pagination',
+      clickable: true,
+    },
+  });
+  } else {
+    let mainSlider = new Swiper('#main-slider', {
+      centeredSlides: true,
+      loop: true,
+      pagination: {
+        el: '.main-slider__pagination',
+        clickable: true,
+      },
+    });
+  }
+}());
