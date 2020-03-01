@@ -427,7 +427,7 @@
     }
 
     &::before {
-      top: 98px;
+      right: 0;
 
       width: 87px;
       height: 113px;
@@ -445,7 +445,6 @@
 
     &::before {
       top: 98px;
-      right: 0;
 
       background-image: url("../img/piggybank-mobile@1x.jpg");
 
@@ -457,7 +456,7 @@
 
   .services__container--loans {
     h3 {
-      padding-right: 17%;
+      padding-right: 23%;
     }
 
     p {
@@ -485,10 +484,16 @@
       padding-right: 7%;
     }
 
+    li {
+      z-index: 3;
+      position: relative;
+    }
+
     &::before {
-      right: 0;
+      top: 98px;
 
       background-image: url("../img/lock-mobile@1x.jpg");
+      z-index: 1;
 
       @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
         background-image: url("../img/lock-mobile@2x.jpg");
@@ -501,8 +506,12 @@
       padding-right: 13%;
     }
 
+    li {
+      padding-right: 22%;
+    }
+
     &::before {
-      right: 0;
+      top: 31%;
 
       background-image: url("../img/phone-mobile@1x.jpg");
 
