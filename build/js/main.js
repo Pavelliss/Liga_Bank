@@ -3,6 +3,8 @@ document.querySelector('.nojs').classList.remove('nojs');
 
 // util
 (function () {
+  const DESKTOP_WIDTH = 1024;
+
   const KeyBoardKey = {
     ENTER: 'Enter',
     ESCAPE: 'Escape',
@@ -21,6 +23,7 @@ document.querySelector('.nojs').classList.remove('nojs');
   window.util = {
     isEnterKey: isEnterKey,
     isEscKey: isEscKey,
+    DESKTOP_WIDTH: DESKTOP_WIDTH,
   }
 }());
 
@@ -107,15 +110,42 @@ buttonShowNav.addEventListener('click', function () {
   nav.classList.toggle('header__nav--active');
 });
 
+// servises
+const services = document.querySelector('.services');
+const servisesItems = services.querySelectorAll('.services__item');
+
+let removeClass = function (element) {
+  if (element.classList.contains('services__item--active')) {
+    element.classList.remove('services__item--active');
+  }
+};
+
+if (window.innerWidth >= window.util.DESKTOP_WIDTH) {
+  const swiperWrapper = services.querySelector('.swiper-wrapper');
+  const swiperSlide = services.querySelectorAll('.swiper-slide');
+
+  services.classList.remove('swiper-container');
+  swiperWrapper.classList.remove('swiper-wrapper');
+  swiperSlide.forEach(function (element) {
+    element.classList.remove('swiper-slide');
+  });
+};
+
+servisesItems.forEach(function (element) {
+  let buttonTab = element.querySelector('.services__tab');
+  buttonTab.addEventListener('click', function () {
+    servisesItems.forEach(removeClass);
+    element.classList.add('services__item--active');
+  });
+});
+
 // swiper
 (function (){
-  const DESKTOP_WIDTH = 1200;
-  if (window.innerWidth >= DESKTOP_WIDTH) {
-    let mainSlider = new Swiper('#main-slider', {
+  let mainSlider = new Swiper('#main-slider', {
     centeredSlides: true,
     loop: true,
     autoplay: {
-      delay: 4000,
+      delay: 4000, //4 sec
       disableOnInteraction: false,
     },
     pagination: {
@@ -123,12 +153,13 @@ buttonShowNav.addEventListener('click', function () {
       clickable: true,
     },
   });
-  } else {
-    let mainSlider = new Swiper('#main-slider', {
+
+  if (window.innerWidth < window.util.DESKTOP_WIDTH) {
+    let servicesSwiper = new Swiper('#servises-slider', {
       centeredSlides: true,
       loop: true,
       pagination: {
-        el: '.main-slider__pagination',
+        el: '.services__pagination',
         clickable: true,
       },
     });
