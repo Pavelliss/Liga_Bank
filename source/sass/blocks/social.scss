@@ -1,0 +1,32 @@
+.social__list {
+  @include list-reset;
+  width: 124px;
+  min-height: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -5px;
+}
+
+.social__item {
+  width: 21px;
+  height: 12px;
+  margin-left: 10px;
+  margin-bottom: 15px;
+
+  transition-duration: 0.3s;
+
+  a {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  &:hover svg,
+  &:focus svg {
+    fill: $main-color;
+  }
+
+  &:active {
+    opacity: 0.3;
+  }
+}

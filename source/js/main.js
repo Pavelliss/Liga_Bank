@@ -75,7 +75,7 @@ document.querySelector('.nojs').classList.remove('nojs');
     popupInputPassword.setAttribute('type', 'password');
   };
 
-  buttonLogin.addEventListener('click', function (evt) {
+  function onButtonLoginClick (evt) {
     evt.preventDefault();
     popupLogin.classList.add('popup--active');
 
@@ -85,7 +85,9 @@ document.querySelector('.nojs').classList.remove('nojs');
     } else {
       popupInputLogin.focus();
     }
-  });
+  };
+
+  buttonLogin.addEventListener('click', onButtonLoginClick);
 
   popupForm.addEventListener('submit', function () {
     if (isStorageSupport) {
