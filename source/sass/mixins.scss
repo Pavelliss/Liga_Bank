@@ -20,6 +20,12 @@
   right: $right;
 }
 
+@mixin min-resolution ($url) {
+  @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
+    background-image: url($url);
+  }
+}
+
 @mixin visually-hidden {
   position: absolute;
   width: 1px;

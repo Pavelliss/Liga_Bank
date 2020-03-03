@@ -35,7 +35,7 @@ document.querySelector('.nojs').classList.remove('nojs');
   const popupBackground = popupLogin.querySelector('.popup__background');
   const popupInputPassword = popupLogin.querySelector('#login-password');
   const popupInputLogin = popupLogin.querySelector('#user-login');
-  const popupButtonShowPass = popupLogin.querySelector('.popup__show-pass');
+  const popupButtonShowPass = popupLogin.querySelector('.form-login__show-pass');
   const popupForm = popupLogin.querySelector('form');
 
   let isStorageSupport = true;
@@ -146,10 +146,10 @@ servisesItems.forEach(function (element) {
   let mainSlider = new Swiper('#main-slider', {
     centeredSlides: true,
     loop: true,
-    autoplay: {
-      delay: 4000, //4 sec
-      disableOnInteraction: false,
-    },
+    // autoplay: {
+    //   delay: 4000, //4 sec
+    //   disableOnInteraction: false,
+    // },
     pagination: {
       el: '.main-slider__pagination',
       clickable: true,

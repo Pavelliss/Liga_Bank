@@ -145,6 +145,7 @@
 
   &::before {
     @include position-abs(152px, auto, auto, 11.5%);
+    @include min-resolution("../img/piggybank-desktop@2x.jpg");
     content: "";
 
     width: 37.5%;
@@ -152,16 +153,13 @@
 
     background-image: url("../img/piggybank-desktop@1x.jpg");
     background-size: cover;
-
-    @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
-      background-image: url("../img/piggybank-desktop@2x.jpg");
-    }
   }
 }
 
 .services__container--loans {
   &::before {
     @include position-abs(152px, auto, auto, 11.5%);
+    @include min-resolution("../img/car-desktop@2x.jpg");
     content: "";
 
     width: 37.5%;
@@ -169,10 +167,6 @@
 
     background-image: url("../img/car-desktop@1x.jpg");
     background-size: cover;
-
-    @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
-      background-image: url("../img/car-desktop@2x.jpg");
-    }
   }
 
   h3 {
@@ -201,6 +195,7 @@
 
   &::before {
     @include position-abs(142px, auto, auto, 11.5%);
+    @include min-resolution("../img/lock-desktop@2x.jpg");
     content: "";
 
     width: 37.5%;
@@ -208,10 +203,6 @@
 
     background-image: url("../img/lock-desktop@1x.jpg");
     background-size: cover;
-
-    @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
-      background-image: url("../img/lock-desktop@2x.jpg");
-    }
   }
 }
 
@@ -226,6 +217,7 @@
 
   &::before {
     @include position-abs(152px, auto, auto, 11.5%);
+    @include min-resolution("../img/phone-desktop@2x.jpg");
     content: "";
 
     width: 37.5%;
@@ -233,10 +225,6 @@
 
     background-image: url("../img/phone-desktop@1x.jpg");
     background-size: cover;
-
-    @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
-      background-image: url("../img/phone-desktop@2x.jpg");
-    }
   }
 }
 
@@ -294,6 +282,7 @@
 
   .services__container--deposits {
     &::before {
+      @include min-resolution("../img/piggybank-tablet@2x.jpg");
       top: 62px;
       right: 7.9%;
 
@@ -301,10 +290,6 @@
       height: 260px;
 
       background-image: url("../img/piggybank-tablet@1x.jpg");
-
-      @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
-        background-image: url("../img/piggybank-tablet@2x.jpg");
-      }
     }
   }
 
@@ -320,6 +305,7 @@
     }
 
     &::before {
+      @include min-resolution("../img/car-tablet@2x.jpg");
       top: 62px;
       right: 5.9%;
 
@@ -327,10 +313,6 @@
       height: 260px;
 
       background-image: url("../img/car-tablet@1x.jpg");
-
-      @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
-        background-image: url("../img/car-tablet@2x.jpg");
-      }
     }
   }
 
@@ -340,6 +322,7 @@
     }
 
     &::before {
+      @include min-resolution("../img/lock-tablet@2x.jpg");
       top: 62px;
       right: 5.9%;
 
@@ -347,10 +330,6 @@
       height: 260px;
 
       background-image: url("../img/lock-tablet@1x.jpg");
-
-      @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
-        background-image: url("../img/lock-tablet@2x.jpg");
-      }
     }
   }
 
@@ -360,6 +339,7 @@
     }
 
     &::before {
+      @include min-resolution("../img/phone-tablet@2x.jpg");
       top: 62px;
       right: 5.9%;
 
@@ -367,10 +347,6 @@
       height: 260px;
 
       background-image: url("../img/phone-tablet@1x.jpg");
-
-      @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
-        background-image: url("../img/phone-tablet@2x.jpg");
-      }
     }
   }
 
@@ -444,13 +420,10 @@
     }
 
     &::before {
+      @include min-resolution("../img/piggybank-mobile@2x.jpg");
       top: 98px;
 
       background-image: url("../img/piggybank-mobile@1x.jpg");
-
-      @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
-        background-image: url("../img/piggybank-mobile@2x.jpg");
-      }
     }
   }
 
@@ -469,13 +442,10 @@
     }
 
     &::before {
+      @include min-resolution("../img/car-mobile@2x.jpg");
       right: 0;
 
       background-image: url("../img/car-mobile@1x.jpg");
-
-      @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
-        background-image: url("../img/car-mobile@2x.jpg");
-      }
     }
   }
 
@@ -490,14 +460,11 @@
     }
 
     &::before {
+      @include min-resolution("../img/lock-mobile@2x.jpg");
       top: 98px;
 
       background-image: url("../img/lock-mobile@1x.jpg");
       z-index: 1;
-
-      @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
-        background-image: url("../img/lock-mobile@2x.jpg");
-      }
     }
   }
 
@@ -511,13 +478,10 @@
     }
 
     &::before {
+      @include min-resolution("../img/phone-mobile@2x.jpg");
       top: 31%;
 
       background-image: url("../img/phone-mobile@1x.jpg");
-
-      @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
-        background-image: url("../img/phone-mobile@2x.jpg");
-      }
     }
   }
 

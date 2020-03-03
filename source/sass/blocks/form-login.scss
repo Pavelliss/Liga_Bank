@@ -1,0 +1,97 @@
+.form-login {
+  width: 100%;
+
+  span {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  label {
+    position: relative;
+
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  input {
+    height: 60px;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 60px;
+    box-sizing: border-box;
+
+    border: 1px solid $dark;
+    border-radius: 4px;
+  }
+}
+
+.form-login__show-pass {
+  @include position-abs(48px, auto, auto, 25px);
+  @include button-reset;
+  width: 22px;
+  height: 12px;
+
+  &:hover svg,
+  &:focus svg {
+    fill: $main-color;
+    transition-duration: 0.3s;
+  }
+
+  &:active {
+    opacity: 0.3;
+  }
+}
+
+.form-login__link {
+  display: block;
+  margin-top: -16px;
+
+  font-size: 12px;
+  line-height: 17px;
+  text-align: end;
+  color: $gray--darken;
+  transition-duration: 0.3s;
+
+  &:hover,
+  &:focus {
+    color: $main-color;
+  }
+
+  &:active {
+    opacity: 0.3;
+  }
+}
+
+.form-login__submit {
+  @include button-reset;
+  margin-top: 23px;
+  width: 100%;
+  min-height: 60px;
+}
+
+@media (max-width: $mobile-width) {
+  .form-login__show-pass {
+    right: 15px;
+  }
+
+  .form-login__submit {
+    margin-top: 8px;
+    height: 51px;
+
+    font-size: 14px;
+  }
+
+  .form-login__container-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-login__link {
+    margin-top: 10px;
+    order: 2;
+
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+  }
+}

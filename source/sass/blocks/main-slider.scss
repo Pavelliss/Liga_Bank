@@ -1,15 +1,15 @@
 .main-slider {
   .main-slider__pagination {
     bottom: 37px;
+  }
 
-    .swiper-pagination-bullet {
-      background-color: #363dc9;
-      opacity: 1;
+  .swiper-pagination-bullet {
+    background-color: #363dc9;
+    opacity: 1;
+  }
 
-      &-active {
-        background-color: $gray--lighten;
-      }
-    }
+  .swiper-pagination-bullet-active {
+    background-color: $gray--lighten;
   }
 }
 
@@ -75,14 +75,12 @@
 }
 
 .main-slider__item--second {
+  @include min-resolution ("../img/slider--man-desktop@2x.jpg");
   background-color: $gray;
   background-image: url("../img/slider--man-desktop@1x.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
-
-  @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
-    background-image: url("../img/slider--man-desktop@2x.jpg");
-  }
+  background-size: auto 100%;
+  background-position: 50%;
 
   .main-slider__container {
     padding-left: 127px;
@@ -91,14 +89,12 @@
 }
 
 .main-slider__item--third {
+  @include min-resolution ("../img/slider--girl-desktop@2x.jpg");
+
   background-color: $gray--light;
   background-image: url("../img/slider--girl-desktop@1x.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-
-  @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
-    background-image: url("../img/slider--girl-desktop@2x.jpg");
-  }
 
   .main-slider__container {
     padding-bottom: 114px;
@@ -196,11 +192,8 @@
   }
 
   .main-slider__item--second {
+    @include min-resolution("../img/slider--man-tablet@2x.jpg");
     background-image: url("../img/slider--man-tablet@1x.jpg");
-
-    @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
-      background-image: url("../img/slider--man-tablet@2x.jpg");
-    }
 
     .main-slider__container {
       padding-bottom: 124px;
@@ -208,11 +201,8 @@
   }
 
   .main-slider__item--third {
+    @include min-resolution("../img/slider--girl-tablet@2x.jpg");
     background-image: url("../img/slider--girl-tablet@1x.jpg");
-
-    @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
-      background-image: url("../img/slider--girl-tablet@2x.jpg");
-    }
 
     .main-slider__container {
       padding-bottom: 76px;
@@ -280,11 +270,8 @@
   }
 
   .main-slider__item--second {
+    @include min-resolution("../img/slider--man-mobile@2x.jpg");
     background-image: url("../img/slider--man-mobile@1x.jpg");
-
-    @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
-      background-image: url("../img/slider--man-mobile@2x.jpg");
-    }
 
     .main-slider__container {
       padding: 0 15px;
@@ -293,11 +280,8 @@
   }
 
   .main-slider__item--third {
+    @include min-resolution("../img/slider--girl-mobile@2x.jpg");
     background-image: url("../img/slider--girl-mobile@1x.jpg");
-
-    @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
-      background-image: url("../img/slider--girl-mobile@2x.jpg");
-    }
 
     .main-slider__container {
       padding: 0 15px;
