@@ -146,10 +146,10 @@ servisesItems.forEach(function (element) {
   let mainSlider = new Swiper('#main-slider', {
     centeredSlides: true,
     loop: true,
-    // autoplay: {
-    //   delay: 4000, //4 sec
-    //   disableOnInteraction: false,
-    // },
+    autoplay: {
+      delay: 4000, //4 sec
+      disableOnInteraction: false,
+    },
     pagination: {
       el: '.main-slider__pagination',
       clickable: true,
