@@ -1,0 +1,69 @@
+.offer {
+  display: flex;
+  flex-wrap: wrap;
+
+  padding: 32px 63px;
+  padding-right: 0;
+
+  font-family: $roboto;
+  color: $dark;
+
+  &--hidden {
+    display: none;
+  }
+}
+
+.offer__container {
+  width: 39%;
+  margin-bottom: 29px;
+  margin-left: 41px;
+}
+
+.offer__wrapper {
+  margin-left: -44px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.offer__title,
+.offer__b {
+  margin-bottom: 24px;
+  font-size: 22px;
+  line-height: 31px;
+  font-weight: 700;
+}
+
+.offer__title {
+  width: 100%;
+}
+
+.offer__b {
+  padding-right: 10px;
+  
+  &::after {
+    content: " рублей";
+  }
+
+  &--percent::after {
+    content: "%";
+  }
+}
+
+.offer__span {
+  display: block;
+  font-size: 16px;
+  line-height: 22px;
+
+  &--error {
+    padding-right: 20%;
+  }
+}
+
+.offer__button {
+  width: 86.5%;
+  margin-top: 5px;
+
+  min-height: 51px;
+  line-height: 51px;
+  font-size: 16px;
+}

@@ -1,0 +1,34 @@
+.range {
+  position: relative;
+
+  width: 100%;
+  height: 1px;
+
+  background-color: #c1c2ca;
+}
+
+.range__progress {
+  @include position-abs(0, 0);
+  width: 0;
+  border: 1px solid $main-color;
+}
+
+.range__handle {
+  @include position-abs(0, 0);
+
+  width: 14px;
+  height: 14px;
+
+  background-color: $main-color;
+  border-radius: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  cursor: pointer;
+}
+
+.range__value {
+  @include position-abs(18px, 0);
+
+  font-size: 14px;
+  line-height: 20px;
+  color: $gray--darken;
+}
