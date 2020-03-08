@@ -11,6 +11,11 @@
   color: $dark;
 }
 
+.calculator__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .calculator__title {
   margin-bottom: 27px;
   font-size: 41px;
@@ -24,11 +29,10 @@
 }
 
 .calculator__form {
-  width: 100%;
+  width: 51%;
 
   form {
-    display: flex;
-    flex-wrap: wrap;
+    width: 100%;
   }
 
   select {
@@ -61,10 +65,6 @@
     line-height: 22px;
     font-weight: 700;
   }
-}
-
-.calculator__wrapper {
-  width: 51%;
 }
 
 .calculator__select {
@@ -289,9 +289,8 @@
   }
 }
 
-.calculator__item input[type="checkbox"]:checked + .calculator__element::before {
+input[type="checkbox"]:checked + .calculator__element::before {
   background-image: url("../img/check_mark--white.svg");
-  background-size: auto;
   background-position: 50% 50%;
   background-size: 7px;
   background-repeat: no-repeat;
@@ -304,4 +303,111 @@
 
 .calculator__offer {
   @include position-abs(113px, auto, auto, 45px);
+}
+
+@media (max-width: $tablet-width) {
+  .calculator {
+    margin-top: 69px;
+  }
+
+  .calculator__container {
+    margin-bottom: 22px;
+  }
+
+  .calculator__title {
+    margin-bottom: 10px;
+
+    font-size: 32px;
+    line-height: 45px;
+  }
+
+  .calculator__wrapper {
+    flex-direction: column;
+  }
+
+  .calculator__p {
+    margin-bottom: 19px;
+
+    font-size: 18px;
+    line-height: 25px;
+  }
+
+  .calculator__form {
+    width: 100%;
+  }
+
+  .calculator__offer {
+    position: static;
+    max-width: 100%;
+    margin-top: 34px;
+  }
+
+  .calculator__item {
+    input {
+      font-size: 16px;
+      line-height: 22px;
+    }
+  }
+}
+
+@media (max-width: $mobile-width) {
+  .calculator {
+    margin-top: 53px;
+    padding: 0 15px;
+  }
+
+  .calculator__container {
+    margin-bottom: 13px;
+  }
+
+  .calculator__title {
+    margin-bottom: 6px;
+
+    font-size: 22px;
+    line-height: 31px;
+  }
+
+  .calculator__p {
+    margin-bottom: 14px;
+
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .calculator__select {
+    margin-bottom: 23px;
+
+    label {
+      padding: 18px 14px;
+    }
+
+    &::before {
+      right: 16px;
+    }
+  }
+
+  .calculator__item {
+    label {
+      margin-bottom: 9px;
+      width: auto;
+    }
+
+    input {
+      font-size: 16px;
+      line-height: 22px;
+    }
+  }
+
+  .calculator__button-count {
+    right: 15px;
+  }
+
+  .calculator__checkbox {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .calculator__offer {
+    margin-top: 18px;
+  }
 }

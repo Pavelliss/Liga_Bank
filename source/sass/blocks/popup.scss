@@ -104,7 +104,13 @@
 
 .popup--offer {
   max-width: 40%;
-  display: block;
+}
+
+.popup--form {
+  position: static;
+  width: 100%;
+
+  background-color: transparent;
 }
 
 @media (max-width: $tablet-width) {

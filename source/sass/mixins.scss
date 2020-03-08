@@ -40,3 +40,11 @@
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
+
+@mixin font-placeholder {
+  font-family: $roboto;
+  font-size: 18px;
+  line-height: 25px;
+  letter-spacing: 0.03em;
+  color: $gray--darken;
+}
