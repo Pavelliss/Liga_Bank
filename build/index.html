@@ -191,16 +191,16 @@
                   Потребительский кредит
                 </label>
               </div>
-              <p class="calculator__p">Шаг 2. Введите параметры кредита</p>
               <ul class="calculator__list">
                 <li class="calculator__item calculator__item--mortgage calculator__item--active">
+                  <p class="calculator__p">Шаг 2. Введите параметры кредита</p>
                   <div class="calculator__container">
                     <span class="calculator__span">Стоимость недвижимости</span>
                     <label>
                       <button class="calculator__button-count calculator__button-count--minus" type="button">
                         <span class="visually-hidden">Уменьшить значение</span>
                       </button>
-                      <input id="calculator-cost" type="number" value="2000000" min="1200000" max="25000000" step="100000">
+                      <input id="calculator-cost" type="text" value="2 000 000 рублей" min="1200000" max="25000000" step="100000" pattern="[0-9]{3}">
                       <button class="calculator__button-count calculator__button-count--plus" type="button">
                         <span class="visually-hidden">Увеличить значение</span>
                       </button>
@@ -210,7 +210,7 @@
                   <div class="calculator__container">
                     <span class="calculator__span">Первоначальный взнос</span>
                     <label>
-                      <input id="calculator-initial" type="number" value="200000">
+                      <input id="calculator-initial" type="text" value="2 000 000 рублей">
                     </label>
                     <div class="range calculator__range">
                       <div class="range__progress"></div>
@@ -222,7 +222,7 @@
                   <div class="calculator__container">
                     <span class="calculator__span">Срок кредитования</span>
                     <label>
-                      <input id="calculator-terms" type="number" value="5" step="1" min="5" max="30">
+                      <input id="calculator-terms" type="text" value="5 лет" step="1" min="5" max="30">
                     </label>
                     <div class="range calculator__range">
                       <div class="range__progress"></div>
@@ -240,6 +240,7 @@
                   </label>
                 </li>
                 <li class="calculator__item calculator__item--car-loans">
+                  <p class="calculator__p">Шаг 2. Введите параметры кредита</p>
                   <div class="calculator__container">
                     <span class="calculator__span">Стоимость автомобиля</span>
                     <label>
@@ -293,6 +294,7 @@
                   </label>
                 </li>
                 <li class="calculator__item calculator__item--consumer-loan">
+                  <p class="calculator__p">Шаг 2. Введите параметры кредита</p>
                   <div class="calculator__container">
                     <span class="calculator__span">Сумма потребительского кредита</span>
                     <label>
@@ -329,7 +331,7 @@
               </ul>
             </form>
           </div>
-          <div class="popup popup--active popup--offer calculator__offer">
+          <div class="popup popup--offer calculator__offer">
             <div class="offer">
               <p class="offer__title">Наше предложение</p>
               <div class="offer__wrapper">
@@ -357,7 +359,7 @@
               <span class="offer__span offer__span--error">Попробуйте использовать другие параметры для расчёта.</span>
             </div>
           </div>
-          <div class="popup popup--active popup--form">
+          <div class="popup popup--form">
             <div class="form-request">
               <form method="POST" action="">
                 <p class="calculator__p form-request__p">Шаг 3. Оформление заявки</p>

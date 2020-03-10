@@ -141,6 +141,21 @@ servisesItems.forEach(function (element) {
   });
 });
 
+// calculator
+const calculatorBlock = document.querySelector('.calculator');
+const inputRadioList = calculatorBlock.querySelectorAll('input[type=radio]');
+const calculatorSelect = calculatorBlock.querySelector('.calculator__select');
+const inputCalculatorCost = calculatorBlock.querySelector('#calculator-cost');
+
+function showSelect (inputRadio) {
+  inputRadio.addEventListener('click', function() {
+    calculatorSelect.classList.toggle('calculator__select--active');
+  });
+};
+
+inputRadioList.forEach(showSelect);
+inputCalculatorCost.value;
+
 // swiper
 (function (){
   let mainSlider = new Swiper('#main-slider', {

@@ -20,10 +20,25 @@ document.querySelector('.nojs').classList.remove('nojs');
     || evt.key === KeyBoardKey.ESCAPE_IE;
   }
 
+  function pluralize (num, one, two, five) {
+    let mod100 = Math.abs(num % 100);
+    if (mod100 > 10 && mod100 < 20) {
+      return five;
+    }
+
+    let mod10 = mod100 % 10;
+    if (mod10 > 1 && mod10 < 5) {
+      return two;
+    }
+
+    return mod10 === 1 ? one : five;
+  };
+
   window.util = {
     isEnterKey: isEnterKey,
     isEscKey: isEscKey,
     DESKTOP_WIDTH: DESKTOP_WIDTH,
+    pluralize: pluralize,
   }
 }());
 
@@ -140,6 +155,102 @@ servisesItems.forEach(function (element) {
     element.classList.add('services__item--active');
   });
 });
+
+// calculator
+(function (){
+  const FIELDS_UNITS = {
+    'calculator-cost': ' рублей',
+    'calculator-initial': ' рублей',
+    'calculator-terms': ' лет',
+  };
+
+  const selectToStepTwo = {
+    'select-mortgage': '.calculator__item--mortgage',
+    'select-auto-loan': '.calculator__item--car-loans',
+    'select-consumer': '.calculator__item--consumer-loan',
+  };
+
+  const test = {
+    mortgage : {
+      selectId: 'select-mortgage',
+      stepTwoBlockClass: '.calculator__item--mortgage',
+    },
+    autoLoan: {
+      selectId: 'select-auto-loan',
+      stepTwoBlockClass: '.calculator__item--car-loans',
+    },
+    consumer: {
+      selectId: 'select-consumer',
+      stepTwoBlockClass: '.calculator__item--consumer-loan',
+    },
+  };
+
+  const calculatorBlock = document.querySelector('.calculator');
+  const calculatorForm = calculatorBlock.querySelector('form');
+  const inputRadioList = calculatorForm.querySelectorAll('input[type=radio]');
+  const calculatorSelect = calculatorForm.querySelector('.calculator__select');
+  const inputFields = calculatorForm.querySelectorAll('input[type=text]');
+  const popupOffer = calculatorBlock.querySelector('.popup--offer');
+
+  function showSelect (inputRadio) {
+    inputRadio.addEventListener('click', function() {
+      calculatorSelect.classList.toggle('calculator__select--active');
+    });
+  };
+
+  function addSpaces (str) {
+    return str.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
+  };
+
+  function onInputTextFocusout (evt) {
+    let input = evt.target;
+    input.type = "text";
+    if (input.value === '') {
+      input.value = '0';
+    }
+    input.value = addSpaces(input.value) + FIELDS_UNITS[input.id];
+  };
+
+  function togglePopup (popup, flag) {
+    if (!popup.classList.contains('popup--active')
+      && flag === true) {
+      popup.classList.add('popup--active');
+    } else if (flag === false) {
+      popup.classList.remove('popup--active');
+    }
+  };
+
+  function showStepTwoBlock () {
+    let stepTwoActiveBlock = calculatorForm.querySelector('.calculator__item--active');
+    let selectChecked = calculatorForm.querySelector('input[type=radio]:checked');
+    let stepTwoBlock = calculatorForm.querySelector(selectToStepTwo[selectChecked.id]);
+
+    if (stepTwoActiveBlock) {
+      stepTwoActiveBlock.classList.remove('calculator__item--active');
+      togglePopup(popupOffer, false);
+    };
+
+    if (stepTwoBlock) {
+      stepTwoBlock.classList.add('calculator__item--active');
+      togglePopup(popupOffer, true);
+    };
+  };
+
+  function onFormChange () {
+    showStepTwoBlock();
+  };
+
+  inputFields.forEach(function (input) {
+    input.addEventListener('focus', function() {
+      input.type = 'number';
+    });
+    input.addEventListener('focusout', onInputTextFocusout);
+  });
+
+  inputRadioList.forEach(showSelect);
+
+  calculatorForm.addEventListener('change', onFormChange);
+}());
 
 // swiper
 (function (){
