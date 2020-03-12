@@ -170,21 +170,6 @@ servisesItems.forEach(function (element) {
     'select-consumer': '.calculator__item--consumer-loan',
   };
 
-  const test = {
-    mortgage : {
-      selectId: 'select-mortgage',
-      stepTwoBlockClass: '.calculator__item--mortgage',
-    },
-    autoLoan: {
-      selectId: 'select-auto-loan',
-      stepTwoBlockClass: '.calculator__item--car-loans',
-    },
-    consumer: {
-      selectId: 'select-consumer',
-      stepTwoBlockClass: '.calculator__item--consumer-loan',
-    },
-  };
-
   const calculatorBlock = document.querySelector('.calculator');
   const calculatorForm = calculatorBlock.querySelector('form');
   const inputRadioList = calculatorForm.querySelectorAll('input[type=radio]');
@@ -250,6 +235,33 @@ servisesItems.forEach(function (element) {
   inputRadioList.forEach(showSelect);
 
   calculatorForm.addEventListener('change', onFormChange);
+
+
+  const rangeHendler = calculatorForm.querySelector('.range__handle');
+
+  rangeHendler.addEventListener('mousedown', function(evt) {
+    evt.preventDefault();
+
+    let startCords = evt.clientX;
+
+    function onMouseMove (moveEvt) {
+      moveEvt.preventDefault();
+
+      let shift = startCords - moveEvt.clientX;
+      startCords = moveEvt.clientX;
+
+      rangeHendler.style.left = (rangeHendler.offsetLeft - shift) + 'px';
+    }
+
+    function onMouseUp (upEvt) {
+      upEvt.preventDefault();
+      document.removeEventListener('mousemove', onMouseMove);
+    }
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp, {once: true});
+    //console.log('test');
+  });
 }());
 
 // swiper
@@ -278,3 +290,9 @@ servisesItems.forEach(function (element) {
     });
   }
 }());
+
+// Smooth-Scroll
+(function (){
+  let scrollCalculator = new SmoothScroll('a[href*="#calculator"]');
+});
+

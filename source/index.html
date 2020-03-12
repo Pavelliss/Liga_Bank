@@ -51,7 +51,7 @@
             <div class="main-slider__wrapper">
               <h1 class="main-slider__title">Лига Банк</h1>
               <p>Кредиты на любой случай</p>
-              <a class="button main-slider__button main-slider__button--white" href="#">Рассчитать кредит</a>
+              <a class="button main-slider__button main-slider__button--white" href="#calculator">Рассчитать кредит</a>
             </div>
             <div class="main-slider__image">
               <picture>
@@ -151,7 +151,7 @@
       </ul>
       <div class="swiper-pagination services__pagination"></div>
     </section>
-    <section class="calculator">
+    <section id="calculator" class="calculator">
       <h2 class="calculator__title">Кредитный калькулятор</h2>
         <div class="calculator__wrapper">
           <div class="calculator__form">
@@ -176,7 +176,7 @@
                 </label>
               </div>
               <ul class="calculator__list">
-                <li class="calculator__item calculator__item--mortgage">
+                <li class="calculator__item calculator__item--active calculator__item--mortgage">
                   <p class="calculator__p">Шаг 2. Введите параметры кредита</p>
                   <div class="calculator__container">
                     <span class="calculator__span">Стоимость недвижимости</span>
@@ -184,7 +184,7 @@
                       <button class="calculator__button-count calculator__button-count--minus" type="button">
                         <span class="visually-hidden">Уменьшить значение</span>
                       </button>
-                      <input type="text" value="2 000 000 рублей" min="1200000" max="25000000" step="100000" pattern="[0-9]{3}">
+                      <input id="calculator-cost" type="text" value="2 000 000 рублей">
                       <button class="calculator__button-count calculator__button-count--plus" type="button">
                         <span class="visually-hidden">Увеличить значение</span>
                       </button>
@@ -194,7 +194,7 @@
                   <div class="calculator__container">
                     <span class="calculator__span">Первоначальный взнос</span>
                     <label>
-                      <input type="text" value="2 000 000 рублей">
+                      <input id="calculator-initial" type="text" value="2 000 000 рублей">
                     </label>
                     <div class="range calculator__range">
                       <div class="range__progress"></div>
@@ -206,7 +206,7 @@
                   <div class="calculator__container">
                     <span class="calculator__span">Срок кредитования</span>
                     <label>
-                      <input type="text" value="5 лет" step="1" min="5" max="30">
+                      <input id="calculator-terms" type="text" value="5 лет">
                     </label>
                     <div class="range calculator__range">
                       <div class="range__progress"></div>
@@ -516,6 +516,7 @@
       </div>
     </div>
   </div>
+  <script src="js/smooth-scroll.js"></script>
   <script src="js/sweper.js"></script>
   <script src="js/main.js"></script>
 </body>
