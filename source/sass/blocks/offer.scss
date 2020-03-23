@@ -40,10 +40,6 @@
 .offer__b {
   padding-right: 10px;
 
-  &::after {
-    content: " рублей";
-  }
-
   &--percent::after {
     content: "%";
   }

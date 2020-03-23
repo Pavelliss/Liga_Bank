@@ -162,39 +162,39 @@
                 <label for="select">
                   Выберите цель кредита
                 </label>
-                <input id="select-mortgage" type="radio" name="loan-purpose" value="mortgage">
-                <label for="select-mortgage">
+                <input id="mortgage" type="radio" name="loan-purpose" value="mortgage">
+                <label for="mortgage">
                   Ипотечное кредитование
                 </label>
-                <input id="select-auto-loan" type="radio" name="loan-purpose" value="auto-loan">
-                <label for="select-auto-loan">
+                <input id="auto" type="radio" name="loan-purpose" value="auto-loan">
+                <label for="auto">
                   Автомобильное кредитование
                 </label>
-                <input id="select-consumer" type="radio" name="loan-purpose" value="consumer">
-                <label for="select-consumer">
+                <input id="consumer" type="radio" name="loan-purpose" value="consumer">
+                <label for="consumer">
                   Потребительский кредит
                 </label>
               </div>
-              <ul class="calculator__list">
-                <li class="calculator__item calculator__item--active calculator__item--mortgage">
+              <div class="calculator__wrapper">
+                <div class="calculator__item">
                   <p class="calculator__p">Шаг 2. Введите параметры кредита</p>
                   <div class="calculator__container">
-                    <span class="calculator__span">Стоимость недвижимости</span>
+                    <span class="calculator__span calculator__span--cost" data-mortgage="Стоимость недвижимости" data-auto="Стоимость автомобиля" data-consumer="Сумма потребительского кредита"></span>
                     <label>
-                      <button class="calculator__button-count calculator__button-count--minus" type="button">
+                      <button id="button-minus" class="calculator__button-count calculator__button-count--minus" type="button">
                         <span class="visually-hidden">Уменьшить значение</span>
                       </button>
-                      <input id="calculator-cost" type="text" value="2 000 000 рублей">
-                      <button class="calculator__button-count calculator__button-count--plus" type="button">
+                      <input id="cost" type="text" autocomplete="off" data-mortgage="1 200 000 рублей" data-auto="500 000 рублей" data-consumer="50 000 рублей">
+                      <button id="button-plus" class="calculator__button-count calculator__button-count--plus" type="button">
                         <span class="visually-hidden">Увеличить значение</span>
                       </button>
                     </label>
-                    <span class="calculator__hint">От 1 200 000 до 25 000 000 рублей</span>
+                    <span class="calculator__hint calculator__hint--cost" data-mortgage="От 1 200 000 до 25 000 000 рублей" data-auto="От 500 000 до 5 000 000" data-consumer="От 50 000 до 3 000 000"></span>
                   </div>
-                  <div class="calculator__container">
+                  <div class="calculator__container calculator__container--initial">
                     <span class="calculator__span">Первоначальный взнос</span>
                     <label>
-                      <input id="calculator-initial" type="text" value="2 000 000 рублей">
+                      <input id="initial" type="text" data-mortgage="120 000 рублей" data-auto="50 000 рублей">
                     </label>
                     <div class="range calculator__range">
                       <div class="range__progress"></div>
@@ -203,116 +203,32 @@
                       </div>
                     </div>
                   </div>
-                  <div class="calculator__container">
+                  <div class="calculator__container calculator__container--term">
                     <span class="calculator__span">Срок кредитования</span>
                     <label>
-                      <input id="calculator-terms" type="text" value="5 лет">
+                      <input id="term" type="text" data-mortgage="5 лет" data-auto="5 лет" data-consumer="1 год">
                     </label>
                     <div class="range calculator__range">
                       <div class="range__progress"></div>
                       <div class="range__handle"></div>
                       <div class="calculator__container-range">
-                        <span class="calculator__hint">5 лет</span>
-                        <span class="calculator__hint calculator__hint--right">30 лет</span>
+                        <span class="calculator__hint calculator__hint--term-min" data-mortgage="5 лет" data-auto="5 лет" data-consumer="1 год"></span>
+                        <span class="calculator__hint calculator__hint--term-max" data-mortgage="30 лет" data-auto="10 лет" data-consumer="7 лет"></span>
                       </div>
                     </div>
                   </div>
                   <label class="calculator__checkbox">
                     <input type="checkbox" checked>
                     <span class="calculator__element"></span>
-                    Использовать материнский капитал
-                  </label>
-                </li>
-                <li class="calculator__item calculator__item--car-loans">
-                  <p class="calculator__p">Шаг 2. Введите параметры кредита</p>
-                  <div class="calculator__container">
-                    <span class="calculator__span">Стоимость автомобиля</span>
-                    <label>
-                      <button class="calculator__button-count calculator__button-count--minus" type="button">
-                        <span class="visually-hidden">Уменьшить значение</span>
-                      </button>
-                      <input id="calculator-cost" type="text" value="2 000 000 рублей">
-                      <button class="calculator__button-count calculator__button-count--plus" type="button">
-                        <span class="visually-hidden">Увеличить значение</span>
-                      </button>
-                    </label>
-                    <span class="calculator__span">От 500 000 до 5 000 000</span>
-                  </div>
-                  <div class="calculator__container">
-                    <span class="calculator__span">Первоначальный взнос</span>
-                    <label>
-                      <input id="calculator-initial" type="text" value="200 000 рублей">
-                    </label>
-                    <div class="range calculator__range">
-                      <div class="range__progress"></div>
-                      <div class="range__handle"></div>
-                      <div class="calculator__container-range">
-                        <span class="calculator__hint">5 лет</span>
-                        <span class="calculator__hint calculator__hint--right">10 лет</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="calculator__container">
-                    <span class="calculator__span">Срок кредитования</span>
-                    <label>
-                      <input id="calculator-terms" type="text" value="5 лет">
-                    </label>
-                    <div class="range calculator__range">
-                      <div class="range__progress"></div>
-                      <div class="range__handle"></div>
-                      <div class="calculator__container-range">
-                        <span class="calculator__hint">1 лет</span>
-                        <span class="calculator__hint calculator__hint--right">5 лет</span>
-                      </div>
-                    </div>
-                  </div>
-                  <label class="calculator__checkbox">
-                    <input type="checkbox" checked>
-                    <span class="calculator__element"></span>
-                    Оформить КАСКО в нашем банке
+                    <span class="calculator__checkbox-text" data-mortgage="Использовать материнский капитал" data-auto="Оформить КАСКО в нашем банке" data-consumer="Участник зарплатного проекта нашего банка"></span>
                   </label>
                   <label class="calculator__checkbox">
                     <input type="checkbox" checked>
                     <span class="calculator__element"></span>
-                    Оформить Страхование жизни в нашем банке
+                    <span class="calculator__checkbox-text" data-auto="Оформить Страхование жизни в нашем банке"></span>
                   </label>
-                </li>
-                <li class="calculator__item calculator__item--consumer-loan">
-                  <p class="calculator__p">Шаг 2. Введите параметры кредита</p>
-                  <div class="calculator__container">
-                    <span class="calculator__span">Сумма потребительского кредита</span>
-                    <label>
-                      <button class="calculator__button-count calculator__button-count--minus" type="button">
-                        <span class="visually-hidden">Уменьшить значение</span>
-                      </button>
-                      <input id="calculator-cost" type="text" value="50 000 рублей">
-                      <button class="calculator__button-count calculator__button-count--plus" type="button">
-                        <span class="visually-hidden">Увеличить значение</span>
-                      </button>
-                    </label>
-                    <span class="calculator__span">От 50 000 до 3 000 000</span>
-                  </div>
-                  <div class="calculator__container">
-                    <span class="calculator__span">Срок кредитования</span>
-                    <label>
-                      <input id="calculator-terms" type="text" value="1 лет">
-                    </label>
-                    <div class="range calculator__range">
-                      <div class="range__progress"></div>
-                      <div class="range__handle"></div>
-                      <div class="calculator__container-range">
-                        <span class="calculator__hint">1 год</span>
-                        <span class="calculator__hint calculator__hint--right">7 лет</span>
-                      </div>
-                    </div>
-                  </div>
-                  <label class="calculator__checkbox">
-                    <input type="checkbox" checked>
-                    <span class="calculator__element"></span>
-                    Участник зарплатного проекта нашего банка
-                  </label>
-                </li>
-              </ul>
+                </div>
+              </div>
             </form>
           </div>
           <div class="popup popup--offer calculator__offer">
@@ -320,11 +236,11 @@
               <p class="offer__title">Наше предложение</p>
               <div class="offer__wrapper">
                 <div class="offer__container">
-                  <b class="offer__b">1 330 000</b>
-                  <span id="offer-sum" class="offer__span">Сумма ипотеки</span>
+                  <b id="offer-sum" class="offer__b">1 330 000</b>
+                  <span class="offer__span offer__span--sum" data-mortgage="Сумма ипотеки" data-auto="Сумма автокредита" data-consumer="Сумма кредита"></span>
                 </div>
                 <div class="offer__container">
-                  <b class="offer__b offer__b--percent">9,40</b>
+                  <b id="offer-Interest-Rate" class="offer__b offer__b--percent">9,40</b>
                   <span class="offer__span">Процентная ставка</span>
                 </div>
                 <div class="offer__container">
@@ -339,7 +255,7 @@
               <a class="button popup__button offer__button" href="#">Оформить заявку</a>
             </div>
             <div class="offer offer--error offer--hidden">
-              <p class="offer__title">Наш банк не выдаёт ипотечные кредиты меньше 200 000 рублей.</p>
+              <p class="offer__title offer__title--error" data-mortgage="Наш банк не выдаёт ипотечные кредиты меньше 500 000 рублей." data-auto="Наш банк не выдаёт автокредиты кредиты меньше 200 000 рублей."></p>
               <span class="offer__span offer__span--error">Попробуйте использовать другие параметры для расчёта.</span>
             </div>
           </div>
@@ -357,7 +273,7 @@
                 </label>
                 <label>
                   <span class="form-request__span">Стоимость недвижимости</span>
-                  <input id="cost" name="cost" type="text" readonly value="2000000">
+                  <input id="" name="cost" type="text" readonly value="2000000">
                 </label>
                 <label>
                   <span class="form-request__span">Первоначальный взнос</span>

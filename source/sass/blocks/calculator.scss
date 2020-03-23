@@ -11,11 +11,6 @@
   color: $dark;
 }
 
-.calculator__wrapper {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .calculator__title {
   margin-bottom: 27px;
   font-size: 41px;
@@ -132,8 +127,7 @@
   }
 }
 
-.calculator__list {
-  @include list-reset;
+.calculator__wrapper {
   width: 100%;
 }
 
@@ -166,6 +160,10 @@
     &:hover,
     &:focus {
       outline-color: $main-color;
+    }
+
+    &:invalid {
+      background-color: rgba($color: red, $alpha: 0.5);
     }
   }
 
