@@ -34,11 +34,21 @@ document.querySelector('.nojs').classList.remove('nojs');
     return mod10 === 1 ? one : five;
   };
 
+  function togglePopup (popup, flag) {
+    if (!popup.classList.contains('popup--active')
+      && flag === true) {
+      popup.classList.add('popup--active');
+    } else if (flag === false) {
+      popup.classList.remove('popup--active');
+    }
+  };
+
   window.util = {
+    DESKTOP_WIDTH: DESKTOP_WIDTH,
     isEnterKey: isEnterKey,
     isEscKey: isEscKey,
-    DESKTOP_WIDTH: DESKTOP_WIDTH,
     pluralize: pluralize,
+    togglePopup: togglePopup,
   }
 }());
 
@@ -231,6 +241,7 @@ servisesItems.forEach(function (element) {
 //----------------------------------------------------------
 // CALCULATOR
 (function (){
+  const ERROR_MESSAGE = 'Не коректное значение';
   const RESTRICTION = {
     mortgage: {
       cost: {min: 1200000, max: 25000000},
@@ -246,6 +257,7 @@ servisesItems.forEach(function (element) {
         min: 0.085, //8.5%
         max: 0.094 //9.4%,
       },
+      requiredIncome: 0.45, //45%
     },
     auto: {
       cost: {min: 500000, max: 5000000},
@@ -261,6 +273,7 @@ servisesItems.forEach(function (element) {
         min: 0.15, //15%
         max: 0.16, //16%
       },
+      requiredIncome: 0.45, //45%
     },
     consumer: {
       cost: {min: 50000, max: 3000000},
@@ -275,6 +288,7 @@ servisesItems.forEach(function (element) {
         middle: 0.125, //12.5%
         max: 0.15, //15%
       },
+      requiredIncome: 0.45, //45%
     },
   };
 
@@ -350,10 +364,9 @@ servisesItems.forEach(function (element) {
   };
 
   function upDateinputInitial (costValue) {
-    let value = convertInputValue(costValue);
-    let percent = Math.floor(value * getCurrentPercent() / 100);
+    let percent = Math.floor(costValue * getCurrentPercent() / 100);
 
-    if (!value) {
+    if (!costValue) {
       return inputInitial.value = convetBackRubl(0);
     }
 
@@ -363,7 +376,7 @@ servisesItems.forEach(function (element) {
 
   function getErrorMessage (input) {
     input.type = 'text';
-    return input.value = 'Не коректное значение';
+    return input.value = ERROR_MESSAGE;
   };
 
   function getCurrentPercent () {
@@ -384,33 +397,23 @@ servisesItems.forEach(function (element) {
 
   function checkInitialValue () {
     let id =  window.selectCheckedId;
-    let cost = convertInputValue(inputCost.value);
-    let costPercent = cost * RESTRICTION[id].minPercent;
+    let costPercent = window.inputsData.cost * RESTRICTION[id].minPercent;
 
     if (+inputInitial.value >= costPercent
-     && +inputInitial.value <= cost
+     && +inputInitial.value <= window.inputsData.cost
       || inputInitial.value === '') {
         return true;
       };
     return false;
   };
 
-  function togglePopup (popup, flag) {
-    if (!popup.classList.contains('popup--active')
-      && flag === true) {
-      popup.classList.add('popup--active');
-    } else if (flag === false) {
-      popup.classList.remove('popup--active');
-    }
-  };
-
   function showStepTwoBlock () {
     if (inputSelect.checked) {
       stepTwoBlock.classList.remove('calculator__item--active');
-      togglePopup(popupOffer, false);
+      window.util.togglePopup(popupOffer, false);
     } else {
       stepTwoBlock.classList.add('calculator__item--active');
-      togglePopup(popupOffer, true);
+      window.util.togglePopup(popupOffer, true);
     }
   };
 
@@ -423,7 +426,7 @@ servisesItems.forEach(function (element) {
 
     let checkboxs = RESTRICTION[id].checkbox;
     labelCheckboxs.forEach(function (label, i) {
-      checkboxs[i] ? label.style = label.style = 'display: block' : label.style = 'display: none';
+      checkboxs[i] ? label.classList.remove('calculator__checkbox--hidden') : label.classList.add('calculator__checkbox--hidden');
     });
   };
 
@@ -455,23 +458,29 @@ servisesItems.forEach(function (element) {
   };
 
   function calculateCost (result) {
-    let percentCost = Math.floor(result/window.range.RangeSizes.max * 100);
+    let percentCost = Math.floor(result / window.range.RangeSizes.max * 100);
     let id =  window.selectCheckedId;
     if (percentCost % RESTRICTION[id].percentStep === 0
      && percentCost >= RESTRICTION[id].minPercent) {
 
       rangeValue.textContent = percentCost + '%';
-      let cost = convertInputValue(inputCost.value);
-      let total = String(Math.floor((cost * percentCost) / 100));
+      let total = String(Math.floor((window.inputsData.cost * percentCost) / 100));
       inputInitial.value = convetBackRubl(total);
+
+      window.inputsData.initial = +total;
+      window.offer.reRenderOffer();
     };
   };
 
   function changeTerm (result) {
     let id =  window.selectCheckedId;
-    let fraction = Math.floor(window.range.RangeSizes.max / (RESTRICTION[id].term.max - RESTRICTION[id].term.min));
-    let total = Math.floor(result / fraction + RESTRICTION[id].term.min);
+    let fraction = Math.round(window.range.RangeSizes.max / (RESTRICTION[id].term.max - RESTRICTION[id].term.min));
+
+    let total = Math.round(result / fraction + RESTRICTION[id].term.min);
     inputTerm.value = convetBackYers(total);
+
+    window.inputsData.term = +total;
+    window.offer.reRenderOffer();
   };
 
   function increasNumber (value) {
@@ -502,11 +511,23 @@ servisesItems.forEach(function (element) {
     return value;
   };
 
+  function upDateInpusts () {
+    let inputValue = {};
+    inputFields.forEach(function (input) {
+      let inputId = input.id;
+      inputValue[inputId] = convertInputValue(input.value);
+    });
+
+    return inputValue;
+  };
+
   // events
 
   function onFormChange () {
     showStepTwoBlock();
     setTimeout(window.offer.fillOffer, 1);
+
+    window.inputsData = upDateInpusts();
   };
 
   function onInputTextFocus (evt) {
@@ -521,14 +542,14 @@ servisesItems.forEach(function (element) {
 
     flag ? getValueInput(inputCost, defaultValue, convetBackRubl) : getErrorMessage(inputCost);
 
-    upDateinputInitial(inputCost.value);
+    window.inputsData = upDateInpusts();
+    upDateinputInitial(window.inputsData.cost);
   };
 
   function onInputInitialFocusout (evt) {
     let id = window.selectCheckedId;
 
-    let cost = convertInputValue(inputCost.value);
-    let defaultValue = cost * RESTRICTION[id].minPercent;
+    let defaultValue = window.inputsData.cost * RESTRICTION[id].minPercent;
     let flag = checkInitialValue();
 
     if (flag) {
@@ -537,6 +558,8 @@ servisesItems.forEach(function (element) {
       inputInitial.type = 'text';
       inputInitial.value = convetBackRubl(defaultValue);
     };
+
+    window.inputsData = upDateInpusts();
   };
 
   function onInputTermFocusout (evt) {
@@ -555,10 +578,12 @@ servisesItems.forEach(function (element) {
     };
   };
 
-  function onButtonCounter (evt) {
+  function onButtonCounterClick (evt) {
     evt.preventDefault();
+    window.inputsData = upDateInpusts();
+
     let button = evt.target;
-    let costValue = convertInputValue(inputCost.value);
+    let costValue = window.inputsData.cost;
 
     if (button.id === 'button-minus') {
       costValue = String(reducesNumber(costValue));
@@ -567,6 +592,7 @@ servisesItems.forEach(function (element) {
     };
 
     inputCost.value = convetBackRubl(costValue);
+    window.offer.reRenderOffer();
   };
 
   window.range.hendlerRange(initialBlock, calculateCost);
@@ -583,17 +609,21 @@ servisesItems.forEach(function (element) {
   inputRadioList.forEach(showSelect);
   inputRadioList.forEach(fillEntryField);
 
-  buttonPlus.addEventListener('click', onButtonCounter);
-  buttonMinus.addEventListener('click', onButtonCounter);
+  buttonPlus.addEventListener('click', onButtonCounterClick);
+  buttonMinus.addEventListener('click', onButtonCounterClick);
 
   calculatorForm.addEventListener('change', onFormChange);
 
   window.calculator = {
     RESTRICTION: RESTRICTION,
     inputInitial: inputInitial,
-    inputCost, inputCost,
+    inputCost: inputCost,
+    inputTerm: inputTerm,
+    stepTwoBlock: stepTwoBlock,
+    popupOffer: popupOffer,
     convertInputValue: convertInputValue,
     convetBackRubl: convetBackRubl,
+    upDateInpusts: upDateInpusts,
   };
 }());
 
@@ -606,7 +636,11 @@ servisesItems.forEach(function (element) {
   const offerError = window.range.calculatorBlock.querySelector('.offer--error');
   const offerSum = offerBlock.querySelector('#offer-sum');
   const offerInterestRate = offerBlock.querySelector('#offer-Interest-Rate');
-  let firstCheckbox = window.range.calculatorForm.querySelector('input[type=checkbox]');
+  const offerMonthlyPayment = offerBlock.querySelector('#monthly-payment');
+  const offerRequiredIncome = offerBlock.querySelector('#required-income');
+  const firstCheckbox = window.range.calculatorForm.querySelector('input[type=checkbox]');
+  const offerButton = offerBlock.querySelector('.offer__button');
+  const formPopup = window.range.calculatorBlock.querySelector('.popup--form-request');
 
   let convertInputValue = window.calculator.convertInputValue;
   let cost = window.calculator.inputCost;
@@ -614,7 +648,7 @@ servisesItems.forEach(function (element) {
 
   // from 0.094 - number, to '9,40' - string
   function convertPercent (percent) {
-  	return String((percent * 100).toFixed(2)).replace('.', ',');
+    return String((percent * 100).toFixed(2)).replace('.', ',');
   };
 
   function showOfferError (bolean) {
@@ -629,12 +663,17 @@ servisesItems.forEach(function (element) {
 
   function calculateSum () {
     let id = window.selectCheckedId;
-    let costValue = convertInputValue(cost.value);
-    let initialValue = convertInputValue(initial.value);
+    let total = window.inputsData.cost;
+
     if (id === 'consumer') {
-      return costValue;
+      return total;
     }
-    return costValue - initialValue;
+
+    if (id === 'mortgage' && firstCheckbox.checked) {
+      total -= RESTRICTION.mortgage.checkbox[0];
+    }
+
+    return total - window.inputsData.initial;
   };
 
   function checkSum (sum) {
@@ -648,23 +687,21 @@ servisesItems.forEach(function (element) {
   };
 
   function getInterestRateMorgage () {
-    let costValue = convertInputValue(cost.value);
-    let initialValue = convertInputValue(initial.value);
-    let percent = Math.floor(initialValue / costValue * 100);
+    let percent = Math.floor(window.inputsData.initial / window.inputsData.cost * 100);
     percent /= 100;
 
     if (percent < RESTRICTION.mortgage.interestRate.initlFeePerc) {
       return RESTRICTION.mortgage.interestRate.max;
     };
+
     return RESTRICTION.mortgage.interestRate.min;
   };
 
   function getInterestRateAuto () {
-    let costValue = convertInputValue(cost.value);
     let checkboxs = window.range.calculatorForm.querySelectorAll('input[type=checkbox]:checked');
     let percent;
 
-    if (costValue < RESTRICTION.auto.interestRate.minCost) {
+    if (window.inputsData.cost < RESTRICTION.auto.interestRate.minCost) {
       percent = RESTRICTION.auto.interestRate.max;
     } else {
       percent = RESTRICTION.auto.interestRate.min;
@@ -678,7 +715,7 @@ servisesItems.forEach(function (element) {
   };
 
   function getInterestRateConsumer () {
-    let costValue = convertInputValue(cost.value);
+    let costValue = window.inputsData.cost;
 
     let interestRate = RESTRICTION.consumer.interestRate;
     let percent;
@@ -717,16 +754,160 @@ servisesItems.forEach(function (element) {
     return result;
   };
 
-  function fillOffer () {
-    let sum = calculateSum();
-    showOfferError(checkSum(sum));
-    offerSum.textContent = window.calculator.convetBackRubl(sum);
-    offerInterestRate.textContent = convertPercent(getInterestRate());
+  function calcMonthlyPayment () {
+    let sumMonth = window.inputsData.term * 12;
+    let monthlyInterestRate = getInterestRate() / 12;
+
+    return Math.floor((calculateSum() * monthlyInterestRate) / (1 - (1 / (1 + monthlyInterestRate) ** sumMonth)));
   };
 
+  function calcRequiredIncome (monthlyPayment) {
+    let id = window.selectCheckedId;
+    if (id === 'select') { return };
+    return Math.floor(monthlyPayment / RESTRICTION[id].requiredIncome);
+  };
+
+  function fillOffer () {
+    let sum = calculateSum();
+    let monthlyPayment = calcMonthlyPayment();
+    let requiredIncome = calcRequiredIncome(monthlyPayment);
+
+    showOfferError(checkSum(sum));
+
+    offerSum.textContent = window.calculator.convetBackRubl(sum);
+    offerInterestRate.textContent = convertPercent(getInterestRate());
+    offerMonthlyPayment.textContent = window.calculator.convetBackRubl(monthlyPayment);
+    offerRequiredIncome.textContent = window.calculator.convetBackRubl(requiredIncome);
+  };
+
+  function reRenderOffer () {
+    window.inputsData = window.calculator.upDateInpusts();
+    fillOffer();
+    window.util.togglePopup(formPopup, false);
+  };
+
+  offerButton.addEventListener('click', function(evt) {
+    evt.preventDefault();
+    window.formRequest.fullForm();
+    window.util.togglePopup(formPopup, true);
+  });
+
   window.offer = {
+    formPopup: formPopup,
     fillOffer: fillOffer,
+    reRenderOffer: reRenderOffer,
   }
+}());
+
+// FORM REQUEST
+(function (){
+  const REQUEST_NUMBER_MULTIPLE = 4;
+
+  const formPopup = window.offer.formPopup;
+  const loanPurpose = formPopup.querySelector('#loan-purpose');
+  const spanCost = formPopup.querySelector('#span-cost');
+  const inputUserName = formPopup.querySelector('#user-name');
+  const inputUserPhone = formPopup.querySelector('#telephone-number');
+  const inputUserEmail = formPopup.querySelector('#user-email');
+  const inputCost = formPopup.querySelector('#request-cost');
+  const inputCounter = formPopup.querySelector('#request-number');
+  const inputInitial = formPopup.querySelector('#initial-fee');
+  const inputTerm = formPopup.querySelector('#loan-term');
+  const buttonSubmit = formPopup.querySelector('.form-request__button');
+  const popupSuccessfully = window.range.calculatorBlock.querySelector('.popup--successfully');
+  const popupButtonClose = popupSuccessfully.querySelector('.popup__button-close');
+  const form = window.range.calculatorBlock.querySelector('#form-calculator');
+
+  // from 11, to 0011
+  function converRequestNumber (num) {
+    num += "";
+    while (num.length < 4) {
+      num = "0" + num;
+    }
+    return num;
+  };
+
+  function resetForm () {
+    window.util.togglePopup(popupSuccessfully, false);
+    window.util.togglePopup(window.calculator.popupOffer, false);
+    window.calculator.stepTwoBlock.classList.remove('calculator__item--active');
+    form.reset();
+  };
+
+  function onButtonCloseClick (evt) {
+    evt.preventDefault();
+    resetForm();
+  };
+
+  function onPopupButtonEscPress (evt) {
+    if (window.util.isEscKey(evt)) {
+      resetForm();
+      window.removeEventListener('keydown', onPopupButtonEscPress);
+    }
+  };
+
+  function increasesCounter (num) {
+    num = +num;
+    return num += 1;
+  };
+
+  let storage = {
+    counter: '',
+    userName: '',
+    userEmail: '',
+    userPhone: '',
+    support: false,
+  };
+
+  try {
+    storage.counter = localStorage.getItem('counter');
+    storage.userName = localStorage.getItem('user-name');
+    storage.userEmail = localStorage.getItem('user-email');
+    storage.userEmail = localStorage.getItem('user-phone');
+  } catch (err) {
+    storage.support = false;
+  };
+
+  function fullForm () {
+    let requestNum = increasesCounter(inputCounter.value);
+
+    loanPurpose.value = loanPurpose.dataset[window.selectCheckedId];
+    spanCost.textContent = spanCost.dataset[window.selectCheckedId];
+    inputCounter.value = converRequestNumber(requestNum);
+    inputCost.value = window.inputsData.cost;
+    inputInitial.value = window.inputsData.initial;
+    inputTerm.value = window.inputsData.term;
+  };
+
+  function upDataStorage () {
+    if (storage.support) {
+      localStorage.setItem('counter', inputCounter.value);
+      localStorage.setItem('user-name', inputUserName.value);
+      localStorage.setItem('user-email', inputUserEmail.value);
+      localStorage.setItem('user-phone', inputUserPhone.value);
+    };
+  };
+
+  function onButtonSubmit (evt) {
+    evt.preventDefault();
+    if (!inputUserName.value || !inputUserPhone.value || !inputUserEmail.value) {
+      formPopup.classList.remove('popup--form-error');
+      formPopup.offsetWidth;
+      formPopup.classList.add('popup--form-error');
+    } else {
+      upDataStorage();
+      window.util.togglePopup(formPopup, false);
+      window.util.togglePopup(popupSuccessfully, true);
+    };
+  };
+
+  buttonSubmit.addEventListener('click', onButtonSubmit);
+  popupButtonClose.addEventListener('click', onButtonCloseClick);
+  window.addEventListener('keydown', onPopupButtonEscPress);
+
+  window.formRequest = {
+    fullForm: fullForm,
+  };
 }());
 
 //----------------------------------------------------------

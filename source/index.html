@@ -155,7 +155,7 @@
       <h2 class="calculator__title">Кредитный калькулятор</h2>
         <div class="calculator__wrapper">
           <div class="calculator__form">
-            <form action="#">
+            <form id="form-calculator" action="#">
               <p class="calculator__p">Шаг 1. Цель кредита</p>
               <div class="calculator__select">
                 <input id="select" type="radio" name="loan-purpose" value="select" checked>
@@ -206,14 +206,14 @@
                   <div class="calculator__container calculator__container--term">
                     <span class="calculator__span">Срок кредитования</span>
                     <label>
-                      <input id="term" type="text" data-mortgage="5 лет" data-auto="5 лет" data-consumer="1 год">
+                      <input id="term" type="text" data-mortgage="5 лет" data-auto="1 год" data-consumer="1 год">
                     </label>
                     <div class="range calculator__range">
                       <div class="range__progress"></div>
                       <div class="range__handle"></div>
                       <div class="calculator__container-range">
-                        <span class="calculator__hint calculator__hint--term-min" data-mortgage="5 лет" data-auto="5 лет" data-consumer="1 год"></span>
-                        <span class="calculator__hint calculator__hint--term-max" data-mortgage="30 лет" data-auto="10 лет" data-consumer="7 лет"></span>
+                        <span class="calculator__hint calculator__hint--term-min" data-mortgage="5 лет" data-auto="1 год" data-consumer="1 год"></span>
+                        <span class="calculator__hint calculator__hint--term-max" data-mortgage="30 лет" data-auto="5 лет" data-consumer="7 лет"></span>
                       </div>
                     </div>
                   </div>
@@ -236,19 +236,19 @@
               <p class="offer__title">Наше предложение</p>
               <div class="offer__wrapper">
                 <div class="offer__container">
-                  <b id="offer-sum" class="offer__b">1 330 000</b>
+                  <b id="offer-sum" class="offer__b"></b>
                   <span class="offer__span offer__span--sum" data-mortgage="Сумма ипотеки" data-auto="Сумма автокредита" data-consumer="Сумма кредита"></span>
                 </div>
                 <div class="offer__container">
-                  <b id="offer-Interest-Rate" class="offer__b offer__b--percent">9,40</b>
+                  <b id="offer-Interest-Rate" class="offer__b offer__b--percent"></b>
                   <span class="offer__span">Процентная ставка</span>
                 </div>
                 <div class="offer__container">
-                  <b class="offer__b">27 868</b>
+                  <b id="monthly-payment" class="offer__b"></b>
                   <span class="offer__span">Ежемесячный платеж</span>
                 </div>
                 <div class="offer__container">
-                  <b class="offer__b">61 929</b>
+                  <b id="required-income" class="offer__b"></b>
                   <span class="offer__span">Необходимый доход</span>
                 </div>
               </div>
@@ -259,7 +259,7 @@
               <span class="offer__span offer__span--error">Попробуйте использовать другие параметры для расчёта.</span>
             </div>
           </div>
-          <div class="popup popup--form">
+          <div class="popup popup--form-request">
             <div class="form-request">
               <form method="POST" action="">
                 <p class="calculator__p form-request__p">Шаг 3. Оформление заявки</p>
@@ -269,19 +269,19 @@
                 </label>
                 <label>
                   <span class="form-request__span">Цель кредита</span>
-                  <input id="loan-purpose" type="text" name="loan-purpose" readonly value="Ипотека">
+                  <input id="loan-purpose" type="text" name="loan-purpose" readonly data-mortgage="Ипотека" data-auto="Автокредит" data-consumer="Потребительский кредит">
                 </label>
                 <label>
-                  <span class="form-request__span">Стоимость недвижимости</span>
-                  <input id="" name="cost" type="text" readonly value="2000000">
+                  <span id="span-cost" class="form-request__span" data-mortgage="Стоимость недвижимости" data-auto="Стоимость автомобиля" data-consumer="Сумма кредита"></span>
+                  <input id="request-cost" name="cost" type="text" readonly>
                 </label>
                 <label>
                   <span class="form-request__span">Первоначальный взнос</span>
-                  <input id="initial-fee" name="initial fee" type="text" readonly value="200000">
+                  <input id="initial-fee" name="initial fee" type="text" readonly>
                 </label>
                 <label>
                   <span class="form-request__span">Срок кредитования</span>
-                  <input id="loan-terms" name="loan-terms" type="text" readonly value="5">
+                  <input id="loan-term" name="loan-terms" type="text" readonly>
                 </label>
                 <div class="form-request__container">
                   <label>
@@ -300,6 +300,17 @@
                 <button class="button form-request__button" type="submit">Отправить</button>
               </form>
             </div>
+          </div>
+          <div class="popup popup--successfully">
+            <p class="calculator__p popup__successfully-p">
+              Спасибо за обращение в наш банк.
+            </p>
+            <p class="popup__successfully-text">
+              Наш менеджер скоро свяжется с вами по указанному номеру телефона.
+            </p>
+            <button class="popup__button-close">
+              <span class="visually-hidden">Закрыть</span>
+            </button>
           </div>
         </div>
     </section>
