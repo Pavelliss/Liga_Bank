@@ -210,12 +210,12 @@
                   <div class="calculator__container calculator__container--initial">
                     <span class="calculator__span">Первоначальный взнос</span>
                     <label>
-                      <input id="initial" type="text" data-mortgage="120 000 рублей" data-auto="50 000 рублей">
+                      <input id="initial" type="text" data-mortgage="120 000 рублей" data-auto="100 000 рублей">
                     </label>
-                    <div class="range calculator__range">
+                    <div id="range-initial" class="range calculator__range">
                       <div class="range__progress"></div>
                       <div class="range__handle">
-                        <span class="range__value">10%</span>
+                        <span class="range__value" data-mortgage="10%" data-auto="20%"></span>
                       </div>
                     </div>
                   </div>
@@ -329,6 +329,28 @@
             </button>
           </div>
         </div>
+    </section>
+    <section class="map">
+      <h2 class="map__title">Отделения Лига Банка</h2>
+      <div class="map__form">
+        <form id="map">
+          <label>
+            <input type="checkbox" name="rus" checked="">
+            Россия
+          </label>
+          <label>
+            <input type="checkbox" name="sng" checked="">
+            СНГ
+          </label>
+          <label>
+            <input type="checkbox" name="euro">
+            Европа
+          </label>
+        </form>
+      </div>
+      <div class="map__image">
+        <img src="" atl="map">
+      </div>
     </section>
   </main>
   <footer class="footer">

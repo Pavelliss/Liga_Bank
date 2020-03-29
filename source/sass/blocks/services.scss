@@ -22,17 +22,21 @@
   .services__container {
     display: none;
   }
+}
 
-  &--active {
-    .services__container {
-      display: block;
-    }
+.services__item--active {
+  .services__container {
+    display: block;
+  }
 
-    .services__tab {
-      background-color: $gray--lighten;
+  .services__tab {
+    background-color: $gray--lighten;
 
-      z-index: 10;
-    }
+    z-index: 10;
+  }
+
+  .services__tab:focus {
+    background-color: $gray--lighten;
   }
 }
 
@@ -284,7 +288,7 @@
     &::before {
       @include min-resolution("../img/piggybank-tablet@2x.jpg");
       top: 62px;
-      right: 7.9%;
+      right: 5.9%;
 
       width: 289px;
       height: 260px;

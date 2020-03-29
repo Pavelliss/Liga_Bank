@@ -179,6 +179,11 @@ servisesItems.forEach(function (element) {
     max: calculatorForm.offsetWidth,
   };
 
+  function calcMinWidthInitial () {
+    let id = window.selectCheckedId;
+    return RangeSizes.max * window.calculator.RESTRICTION[id].minPercent;
+  }
+
   function hendlerRange (block, callBack) {
     const rangeBlock = block.querySelector('.range');
     const rangeHendler = block.querySelector('.range__handle');
@@ -188,6 +193,8 @@ servisesItems.forEach(function (element) {
       evt.preventDefault();
 
       RangeSizes.max = rangeBlock.offsetWidth;
+      RangeSizes.min = 0;
+
       let startCord = evt.clientX;
 
       function onMouseMove (moveEvt) {
@@ -217,6 +224,16 @@ servisesItems.forEach(function (element) {
     });
   };
 
+  function upDataRange (block, value) {
+    const rangeHendler = block.querySelector('.range__handle');
+    const rangeProgressive = block.querySelector('.range__progress');
+    const rangeValue = block.querySelector('.range__value');
+
+    if (rangeValue) { rangeValue.textContent = value + '%'};
+    rangeHendler.style.left = value + '%';
+    rangeProgressive.style.width = value + '%';
+  };
+
   function resetRanges () {
     const ranges = calculatorBlock.querySelectorAll('.range');
 
@@ -224,8 +241,13 @@ servisesItems.forEach(function (element) {
       const rangeHendler = range.querySelector('.range__handle');
       const rangeProgressive = range.querySelector('.range__progress');
 
-      rangeHendler.style.left = 0 + 'px';
-      rangeProgressive.style.width = 0 + 'px';
+      if (range.id === 'range-initial') {
+        rangeHendler.style.left = calcMinWidthInitial() + 'px';
+        rangeProgressive.style.width = calcMinWidthInitial() + 'px';
+      } else {
+        rangeHendler.style.left = 0 + 'px';
+        rangeProgressive.style.width = 0 + 'px';
+      };
     });
   };
 
@@ -235,6 +257,8 @@ servisesItems.forEach(function (element) {
     calculatorForm: calculatorForm,
     calculatorBlock: calculatorBlock,
     RangeSizes: RangeSizes,
+    upDataRange: upDataRange,
+    calcMinWidthInitial: calcMinWidthInitial,
   };
 }());
 
@@ -364,14 +388,18 @@ servisesItems.forEach(function (element) {
   };
 
   function upDateinputInitial (costValue) {
-    let percent = Math.floor(costValue * getCurrentPercent() / 100);
+    let percent = getCurrentPercent();
+    let fractionNum = Math.floor(costValue * percent / 100);
 
     if (!costValue) {
       return inputInitial.value = convetBackRubl(0);
     }
 
-    inputInitial.value = convetBackRubl(percent);
-    getCurrentPercent();
+    inputInitial.value = convetBackRubl(fractionNum);
+    //getCurrentPercent();
+    percent = getCurrentPercent();
+    window.inputsData.initial = fractionNum;
+    window.range.upDataRange(initialBlock, percent);
   };
 
   function getErrorMessage (input) {
@@ -443,6 +471,8 @@ servisesItems.forEach(function (element) {
       inputTerm.value = inputTerm.dataset[selectCheckedId];
       initialBlock.style = RESTRICTION[selectCheckedId].initialStyle;
 
+      rangeValue.textContent = rangeValue.dataset[selectCheckedId];
+
       spanCheckboxs.forEach(fillCheckboxText);
       spanCost.textContent = spanCost.dataset[selectCheckedId];
       spanHintCost.textContent = spanHintCost.dataset[selectCheckedId];
@@ -452,6 +482,7 @@ servisesItems.forEach(function (element) {
       offerErrTitle.textContent = offerErrTitle.dataset[selectCheckedId];
       offerSpanSum.textContent = offerSpanSum.dataset[selectCheckedId];
 
+      window.inputsData = upDateInpusts()
       window.range.resetRanges();
       showCheckbox();
     });
@@ -460,6 +491,7 @@ servisesItems.forEach(function (element) {
   function calculateCost (result) {
     let percentCost = Math.floor(result / window.range.RangeSizes.max * 100);
     let id =  window.selectCheckedId;
+    window.range.RangeSizes.min = window.range.calcMinWidthInitial();
     if (percentCost % RESTRICTION[id].percentStep === 0
      && percentCost >= RESTRICTION[id].minPercent) {
 
@@ -526,13 +558,14 @@ servisesItems.forEach(function (element) {
   function onFormChange () {
     showStepTwoBlock();
     setTimeout(window.offer.fillOffer, 1);
-
-    window.inputsData = upDateInpusts();
+    //window.inputsData = upDateInpusts();
   };
 
   function onInputTextFocus (evt) {
     let input = evt.target;
+    let value = convertInputValue(input.value);
     input.type = 'number';
+    input.value = value;
   };
 
   function onInputCostFocusout () {
@@ -560,6 +593,9 @@ servisesItems.forEach(function (element) {
     };
 
     window.inputsData = upDateInpusts();
+
+    let percentRange = ((window.inputsData.initial / window.inputsData.cost) * 100).toFixed(0);
+    window.range.upDataRange(initialBlock, percentRange);
   };
 
   function onInputTermFocusout (evt) {
@@ -567,14 +603,23 @@ servisesItems.forEach(function (element) {
     let defaultValue = RESTRICTION[id].term.min;
     let value = +inputTerm.value;
 
-    if (value < RESTRICTION[id].term.min && value !== 0) {
+    if (value < RESTRICTION[id].term.min && value !== '0') {
       inputTerm.type= 'text';
       inputTerm.value = convetBackYers(RESTRICTION[id].term.min);
+
+      window.range.upDataRange(termBlock, 0);
+      window.inputsData.term = RESTRICTION[id].term.min;
     } else if (value > RESTRICTION[id].term.max) {
       inputTerm.type= 'text';
       inputTerm.value = convetBackYers(RESTRICTION[id].term.max);
+      window.range.upDataRange(termBlock, 100);
+      window.inputsData.term = RESTRICTION[id].term.max;
     } else {
+      let percentRange = ((value - RESTRICTION[id].term.min) / (RESTRICTION[id].term.max - RESTRICTION[id].term.min)) * 100;
+
       getValueInput(inputTerm, defaultValue, convetBackYers);
+      window.range.upDataRange(termBlock, percentRange);
+      window.inputsData.term = value;
     };
   };
 
@@ -592,6 +637,10 @@ servisesItems.forEach(function (element) {
     };
 
     inputCost.value = convetBackRubl(costValue);
+    window.inputsData.cost = costValue;
+    upDateinputInitial(window.inputsData.cost);
+    window.inputsData = upDateInpusts();
+
     window.offer.reRenderOffer();
   };
 
@@ -623,6 +672,7 @@ servisesItems.forEach(function (element) {
     popupOffer: popupOffer,
     convertInputValue: convertInputValue,
     convetBackRubl: convetBackRubl,
+    convetBackYers:convetBackYers,
     upDateInpusts: upDateInpusts,
   };
 }());
@@ -641,10 +691,6 @@ servisesItems.forEach(function (element) {
   const firstCheckbox = window.range.calculatorForm.querySelector('input[type=checkbox]');
   const offerButton = offerBlock.querySelector('.offer__button');
   const formPopup = window.range.calculatorBlock.querySelector('.popup--form-request');
-
-  let convertInputValue = window.calculator.convertInputValue;
-  let cost = window.calculator.inputCost;
-  let initial = window.calculator.inputInitial;
 
   // from 0.094 - number, to '9,40' - string
   function convertPercent (percent) {
@@ -782,6 +828,7 @@ servisesItems.forEach(function (element) {
 
   function reRenderOffer () {
     window.inputsData = window.calculator.upDateInpusts();
+    console.log(window.inputsData);
     fillOffer();
     window.util.togglePopup(formPopup, false);
   };
@@ -820,9 +867,9 @@ servisesItems.forEach(function (element) {
 
   // from 11, to 0011
   function converRequestNumber (num) {
-    num += "";
+    num += '';
     while (num.length < 4) {
-      num = "0" + num;
+      num = '0' + num;
     }
     return num;
   };
@@ -873,10 +920,10 @@ servisesItems.forEach(function (element) {
 
     loanPurpose.value = loanPurpose.dataset[window.selectCheckedId];
     spanCost.textContent = spanCost.dataset[window.selectCheckedId];
-    inputCounter.value = converRequestNumber(requestNum);
-    inputCost.value = window.inputsData.cost;
-    inputInitial.value = window.inputsData.initial;
-    inputTerm.value = window.inputsData.term;
+    inputCounter.value = '№ ' + converRequestNumber(requestNum);
+    inputCost.value = window.calculator.convetBackRubl(window.inputsData.cost);
+    inputInitial.value = window.calculator.convetBackRubl(window.inputsData.initial);
+    inputTerm.value = window.calculator.convetBackYers(window.inputsData.term);
   };
 
   function upDataStorage () {
@@ -908,6 +955,11 @@ servisesItems.forEach(function (element) {
   window.formRequest = {
     fullForm: fullForm,
   };
+}());
+
+// MAP
+(function (){
+  // AIzaSyDiALbMHOgDCnNTFvtowWig_DDSyTYoxBw
 }());
 
 //----------------------------------------------------------
