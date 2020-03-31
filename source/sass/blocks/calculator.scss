@@ -177,6 +177,10 @@
     appearance: none;
   }
 
+  input {
+    -moz-appearance:textfield;
+  }
+
   &--active {
     display: block;
   }
