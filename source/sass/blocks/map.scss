@@ -1,7 +1,7 @@
 .map {
   max-width: 1170px;
   margin: 0 auto;
-  margin-bottom: 107px;
+  margin-bottom: 111px;
   padding: 0 45px;
 
   font-family: $roboto;
@@ -79,9 +79,8 @@ input[type="checkbox"]:checked + .map__element::before {
   }
 
   .map__title {
-    padding: 0 15px;
-
-    margin-bottom: 30px;
+    padding: 0;
+    margin-bottom: 33px;
 
     font-size: 32px;
     line-height: 45px;
@@ -96,8 +95,13 @@ input[type="checkbox"]:checked + .map__element::before {
     padding-right: 0;
   }
 
+  .map__image {
+    height: 381px;
+  }
+
   .map__title {
     margin-bottom: 19px;
+    padding: 0 15px;
 
     font-size: 22px;
     font-weight: 32px;

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Лучший банк в России">
   <title>Лига Банк</title>
   <link rel="stylesheet" href="css/style.min.css">
 </head>
@@ -94,7 +95,7 @@
             <div class="main-slider__wrapper">
               <h2 class="main-slider__title">Лига Банк</h2>
               <p>Всегда рядом</p>
-              <a class="button main-slider__button" href="#">Найти отделение</a>
+              <a class="button main-slider__button" href="#map">Найти отделение</a>
             </div>
           </div>
         </li>
@@ -196,15 +197,17 @@
                   <p class="calculator__p">Шаг 2. Введите параметры кредита</p>
                   <div class="calculator__container">
                     <span class="calculator__span calculator__span--cost" data-mortgage="Стоимость недвижимости" data-auto="Стоимость автомобиля" data-consumer="Сумма потребительского кредита"></span>
-                    <label>
+                    <div class="calculator__container-cost">
                       <button id="button-minus" class="calculator__button-count calculator__button-count--minus" type="button">
                         <span class="visually-hidden">Уменьшить значение</span>
                       </button>
-                      <input id="cost" type="text" autocomplete="off" data-mortgage="1 200 000 рублей" data-auto="500 000 рублей" data-consumer="50 000 рублей">
+                      <label>
+                        <input id="cost" type="text" autocomplete="off" data-mortgage="1 200 000 рублей" data-auto="500 000 рублей" data-consumer="50 000 рублей">
+                      </label>
                       <button id="button-plus" class="calculator__button-count calculator__button-count--plus" type="button">
                         <span class="visually-hidden">Увеличить значение</span>
                       </button>
-                    </label>
+                    </div>
                     <span class="calculator__hint calculator__hint--cost" data-mortgage="От 1 200 000 до 25 000 000 рублей" data-auto="От 500 000 до 5 000 000" data-consumer="От 50 000 до 3 000 000"></span>
                   </div>
                   <div class="calculator__container calculator__container--initial">
@@ -277,7 +280,7 @@
           </div>
           <div class="popup popup--form-request">
             <div class="form-request">
-              <form method="POST" action="">
+              <form method="POST" action="#">
                 <p class="calculator__p form-request__p">Шаг 3. Оформление заявки</p>
                 <label>
                   <span class="form-request__span">Номер заявки</span>
@@ -306,7 +309,7 @@
                   </label>
                   <label>
                     <span class="visually-hidden">Телефон</span>
-                    <input id="telephone-number" name="telephone-number" type="tel" placeholder="Телефон" required="">
+                    <input id="telephone-number" name="telephone-number" type="tel" placeholder="Телефон" pattern="\+7\s?[\(]{0,1}[0-9]{3}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}" required="">
                   </label>
                   <label>
                     <span class="visually-hidden">Адрес электронной почты</span>
@@ -495,6 +498,7 @@
   </script>
   <script src="js/smooth-scroll.js"></script>
   <script src="js/sweper.js"></script>
+  <script src="js/inputmask.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

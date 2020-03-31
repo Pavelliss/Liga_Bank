@@ -3,6 +3,7 @@
   flex-wrap: wrap;
 
   padding: 32px 63px;
+  padding-bottom: 60px;
   padding-right: 0;
 
   font-family: $roboto;
@@ -71,6 +72,10 @@
 }
 
 @media (max-width: $tablet-width) {
+  .offer {
+    padding-bottom: 31px;
+  }
+
   .offer__container {
     width: 29%;
     margin-left: 39px;

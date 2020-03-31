@@ -460,7 +460,8 @@ servisesItems.forEach(function (element) {
   function fillEntryField (inputRadio) {
     inputRadio.addEventListener('change', function() {
       window.selectCheckedId = calculatorForm.querySelector('input[type=radio]:checked').id;
-
+      window.util.togglePopup(window.offer.formPopup, false);
+      
       if (selectCheckedId === 'select') { return; };
 
       inputCost.value = inputCost.dataset[selectCheckedId];
@@ -846,8 +847,6 @@ servisesItems.forEach(function (element) {
 
 // FORM REQUEST
 (function (){
-  const REQUEST_NUMBER_MULTIPLE = 4;
-
   const formPopup = window.offer.formPopup;
   const loanPurpose = formPopup.querySelector('#loan-purpose');
   const spanCost = formPopup.querySelector('#span-cost');
@@ -952,6 +951,7 @@ servisesItems.forEach(function (element) {
 
   window.formRequest = {
     fullForm: fullForm,
+    resetForm: resetForm,
   };
 }());
 
@@ -1063,7 +1063,7 @@ servisesItems.forEach(function (element) {
 
     map = new ymaps.Map('map', {
       center: [55.16, 41.37],
-      zoom: 5,
+      zoom: 4,
     });
 
     let filtredCity = CITYS.filter(function (obj) {
@@ -1124,4 +1124,13 @@ servisesItems.forEach(function (element) {
 // SMOTH-SCROLL
 (function (){
   let scrollCalculator = new SmoothScroll('a[href*="#calculator"]');
-});
+  let scrollMap = new SmoothScroll('a[href*="#map"]');
+}());
+
+//----------------------------------------------------------
+// PHONE MASK
+(function (){
+  const inputTel = document.querySelector('#telephone-number');
+  let im = new Inputmask('+7 (999) 999-9999');
+  im.mask(inputTel);
+}());

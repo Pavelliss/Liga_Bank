@@ -17,6 +17,33 @@
   &--active {
     display: block;
   }
+
+  &--login {
+    box-sizing: border-box;
+    flex-direction: column;
+    width: 544px;
+    margin-left: -272px;
+    margin-top: -247px;
+
+    .popup__wraper {
+      padding: 55px;
+
+      z-index: 1;
+      background-color: $gray--lighten;
+      border: 4px solid $main-color;
+    }
+
+    .popup__container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 41px;
+    }
+
+    .popup__logo {
+      width: 150px;
+      height: 27px;
+    }
+  }
 }
 
 .popup__background {
@@ -30,33 +57,6 @@
   background-color: rgba($color: #000000, $alpha: 0.6);
 
   z-index: -1;
-}
-
-.popup--login {
-  box-sizing: border-box;
-  flex-direction: column;
-  width: 544px;
-  margin-left: -272px;
-  margin-top: -247px;
-
-  .popup__wraper {
-    padding: 55px;
-
-    z-index: 1;
-    background-color: $gray--lighten;
-    border: 4px solid $main-color;
-  }
-
-  .popup__container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 41px;
-  }
-
-  .popup__logo {
-    width: 150px;
-    height: 27px;
-  }
 }
 
 .popup__button-close {
