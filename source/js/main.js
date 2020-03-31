@@ -396,7 +396,6 @@ servisesItems.forEach(function (element) {
     }
 
     inputInitial.value = convetBackRubl(fractionNum);
-    //getCurrentPercent();
     percent = getCurrentPercent();
     window.inputsData.initial = fractionNum;
     window.range.upDataRange(initialBlock, percent);
@@ -558,7 +557,6 @@ servisesItems.forEach(function (element) {
   function onFormChange () {
     showStepTwoBlock();
     setTimeout(window.offer.fillOffer, 1);
-    //window.inputsData = upDateInpusts();
   };
 
   function onInputTextFocus (evt) {
@@ -958,8 +956,140 @@ servisesItems.forEach(function (element) {
 }());
 
 // MAP
-(function (){
-  // AIzaSyDiALbMHOgDCnNTFvtowWig_DDSyTYoxBw
+(function () {
+  const CITYS = [
+    {
+      latitube: 55.75,
+      longitube: 37.6167,
+      balloonContent: 'Москва',
+      region: 'rus',
+    },
+    {
+      latitube: 59.96,
+      longitube: 30.16,
+      balloonContent: 'Санкт-Петербург',
+      region: 'rus',
+    },
+    {
+      latitube: 51.53,
+      longitube: 46.03,
+      balloonContent: 'Саратов',
+      region: 'rus',
+    },
+    {
+      latitube: 67.62,
+      longitube: 33.66,
+      balloonContent: 'Кировск',
+      region: 'rus',
+    },
+    {
+      latitube: 57.15,
+      longitube: 65.54,
+      balloonContent: 'Тюмень',
+      region: 'rus',
+    },
+    {
+      latitube: 54.99,
+      longitube: 73.37,
+      balloonContent: 'Омск',
+      region: 'rus',
+    },
+
+    {
+      latitube: 40.38,
+      longitube: 49.83,
+      balloonContent: 'Баку',
+      region: 'sng',
+    },
+    {
+      latitube: 39.79,
+      longitube: 71.72,
+      balloonContent: 'Ташкент',
+      region: 'sng',
+    },
+    {
+      latitube: 53.90,
+      longitube: 27.56,
+      balloonContent: 'Минск',
+      region: 'sng',
+    },
+    {
+      latitube: 43.43,
+      longitube: 77.01,
+      balloonContent: 'Алма-Ата',
+      region: 'sng',
+    },
+
+    {
+      latitube: 48.86,
+      longitube: 2.35,
+      balloonContent: 'Париж',
+      region: 'euro',
+    },
+    {
+      latitube: 50.09,
+      longitube: 14.42,
+      balloonContent: 'Прага',
+      region: 'euro',
+    },
+    {
+      latitube: 51.51,
+      longitube: -0.13,
+      balloonContent: 'Лондон',
+      region: 'euro',
+    },
+    {
+      latitube: 41.89,
+      longitube: 12.48,
+      balloonContent: 'Рим',
+      region: 'euro',
+    },
+  ];
+
+  const formMap = document.querySelector('#form-map');
+  let map;
+
+  function getInputIdChecked () {
+    let regions = [];
+    const inputChecks = formMap.querySelectorAll('input[type=checkbox]:checked');
+    inputChecks.forEach(function(input) {
+      regions.push(input.id);
+    });
+    return regions;
+  };
+
+  function init () {
+    const inputChecks = getInputIdChecked();
+
+    map = new ymaps.Map('map', {
+      center: [55.16, 41.37],
+      zoom: 5,
+    });
+
+    let filtredCity = CITYS.filter(function (obj) {
+      return inputChecks.indexOf(obj.region) !== -1;
+    });
+
+    filtredCity.forEach(function(obj) {
+      var placemark = new ymaps.Placemark([obj.latitube, obj.longitube], {
+        balloonContent: obj.balloonContent,
+      },
+      {
+        iconLayout: 'default#image',
+        iconImageHref: 'img/location.png',
+        iconImageSize: [37, 42],
+        iconImageOffset: [-18, -42],
+      });
+      map.geoObjects.add(placemark);
+    });
+  };
+
+  formMap.addEventListener('change', function() {
+    map.destroy();
+    ymaps.ready(init);
+  });
+
+  ymaps.ready(init);
 }());
 
 //----------------------------------------------------------

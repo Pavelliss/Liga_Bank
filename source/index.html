@@ -317,23 +317,33 @@
     <section class="map">
       <h2 class="map__title">Отделения Лига Банка</h2>
       <div class="map__form">
-        <form id="map">
+        <form id="form-map">
           <label>
-            <input type="checkbox" name="rus" checked>
+            <input id="rus" type="checkbox" name="rus" checked>
+            <span class="map__element"></span>
             Россия
           </label>
           <label>
-            <input type="checkbox" name="sng" checked>
+            <input id="sng" type="checkbox" name="sng" checked>
+            <span class="map__element"></span>
             СНГ
           </label>
           <label>
-            <input type="checkbox" name="euro">
+            <input id="euro" type="checkbox" name="euro">
+            <span class="map__element"></span>
             Европа
           </label>
         </form>
       </div>
-      <div class="map__image">
-        <img src="" atl="map">
+      <div id="map" class="map__image">
+        <picture>
+          <source type="image/webp" media="(min-width: 1024px)" srcset="img/map-desktop@1x.webp 1x, img/map-desktop@2x.webp 2x">
+          <source type="image/webp" media="(min-width: 768px)" srcset="img/map-tablet@1x.webp 1x, img/map-tablet@2x.webp 2x">
+          <source type="image/webp" srcset="img/map-mobile@1x.webp 1x, img/map-mobile@2x.webp 2x">
+          <source  media="(min-width: 1024px)" srcset="img/map-desktop@1x.jpg 1x, img/map-desktop@2x.jpg 2x">
+          <source media="(min-width: 768px)" srcset="img/map-tablet@1x.jpg 1x, img/map-tablet@2x.jpg 2x">
+          <img src="img/map-mobile@1x.jpg" srcset="img/map-mobile@2x.jpg 2x" alt="map" width="320" height="381">
+        </picture>
       </div>
     </section>
   </main>
@@ -465,6 +475,8 @@
       </div>
     </div>
   </div>
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=cae23ce7-2af9-42a7-8ca4-7c9739d4df9f&lang=ru_RU" type="text/javascript">
+  </script>
   <script src="js/smooth-scroll.js"></script>
   <script src="js/sweper.js"></script>
   <script src="js/main.js"></script>

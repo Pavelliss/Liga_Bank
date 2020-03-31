@@ -4,7 +4,7 @@
   max-width: 1170px;
   padding: 0 45px;
   margin: 0 auto;
-  margin-bottom: 150px;
+  margin-bottom: 178px;
   margin-top: 96px;
 
   font-family: $roboto;
@@ -324,6 +324,7 @@ input[type="checkbox"]:checked + .calculator__element::before {
 @media (max-width: $tablet-width) {
   .calculator {
     margin-top: 69px;
+    margin-bottom: 147px;
   }
 
   .calculator__select {
@@ -377,6 +378,7 @@ input[type="checkbox"]:checked + .calculator__element::before {
 @media (max-width: $mobile-width) {
   .calculator {
     margin-top: 53px;
+    margin-bottom: 121px;
     padding: 0 15px;
   }
 
