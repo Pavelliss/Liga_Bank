@@ -55,8 +55,9 @@ document.querySelector('.nojs').classList.remove('nojs');
 //----------------------------------------------------------
 // FORM LOGIN
 (function () {
-  const popupLogin = document.querySelector('.popup--login');
-  const buttonLogin = document.querySelector('.header__authorized');
+  const body = document.querySelector('body');
+  const popupLogin = body.querySelector('.popup--login');
+  const buttonLogin = body.querySelector('.header__authorized');
   const popupButtonClose = popupLogin.querySelector('.popup__button-close');
   const popupBackground = popupLogin.querySelector('.popup__background');
   const popupInputPassword = popupLogin.querySelector('#login-password');
@@ -76,12 +77,14 @@ document.querySelector('.nojs').classList.remove('nojs');
   function onPopupButtonClick (evt) {
     evt.preventDefault();
     popupLogin.classList.remove('popup--active');
+    body.classList.remove('body-popup');
   };
 
   function onPopupButtonEscPress (evt) {
     if (window.util.isEscKey(evt)) {
       if (popupLogin.classList.contains('popup--active')) {
         popupLogin.classList.remove('popup--active');
+        body.classList.remove('body-popup');
         window.removeEventListener('keydown', onPopupButtonEscPress);
       }
     }
@@ -89,6 +92,7 @@ document.querySelector('.nojs').classList.remove('nojs');
 
   function onBodyClick () {
     popupLogin.classList.remove('popup--active');
+    body.classList.remove('body-popup');
   };
 
   function onButtonShowPass (evt) {
@@ -104,6 +108,7 @@ document.querySelector('.nojs').classList.remove('nojs');
   function onButtonLoginClick (evt) {
     evt.preventDefault();
     popupLogin.classList.add('popup--active');
+    body.classList.add('body-popup');
 
     if (storageLogin) {
       popupInputLogin.value = storageLogin;
@@ -461,7 +466,7 @@ servisesItems.forEach(function (element) {
     inputRadio.addEventListener('change', function() {
       window.selectCheckedId = calculatorForm.querySelector('input[type=radio]:checked').id;
       window.util.togglePopup(window.offer.formPopup, false);
-      
+
       if (selectCheckedId === 'select') { return; };
 
       inputCost.value = inputCost.dataset[selectCheckedId];
@@ -933,15 +938,17 @@ servisesItems.forEach(function (element) {
   };
 
   function onButtonSubmit (evt) {
-    evt.preventDefault();
-    if (!inputUserName.value || !inputUserPhone.value || !inputUserEmail.value) {
-      formPopup.classList.remove('popup--form-error');
-      formPopup.offsetWidth;
-      formPopup.classList.add('popup--form-error');
-    } else {
+    if (inputUserName.validity.valid
+     && inputUserPhone.validity.valid
+     && inputUserEmail.validity.valid ) {
+      evt.preventDefault();
       upDataStorage();
       window.util.togglePopup(formPopup, false);
       window.util.togglePopup(popupSuccessfully, true);
+    } else {
+      formPopup.classList.remove('popup--form-error');
+      formPopup.offsetWidth;
+      formPopup.classList.add('popup--form-error');
     };
   };
 

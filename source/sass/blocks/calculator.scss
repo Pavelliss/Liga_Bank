@@ -4,7 +4,7 @@
   max-width: 1170px;
   padding: 0 45px;
   margin: 0 auto;
-  margin-bottom: 98px;
+  margin-bottom: 178px;
   margin-top: 96px;
 
   font-family: $roboto;
@@ -193,6 +193,8 @@
   width: 16px;
   height: 16px;
 
+  outline: none;
+
   &::before,
   &::after {
     content: "";
@@ -325,6 +327,7 @@ input[type="checkbox"]:checked + .calculator__element::before {
 .calculator__checkbox {
   display: block;
   margin-left: 24px;
+  cursor: pointer;
 
   &--hidden {
     display: none;

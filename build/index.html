@@ -34,7 +34,9 @@
         <span class="visually-hidden">Открыть, закрыть меню</span>
       </button>
       <div class="header__logo">
-        <img src="img/logo.svg" width="149" height="25" alt="Лига Банк">
+        <a href="#">
+          <img src="img/logo.svg" width="149" height="25" alt="Лига Банк">
+        </a>
       </div>
       <nav class="nav header__nav nojs">
         <ul class="nav__list">
@@ -305,7 +307,7 @@
                 <div class="form-request__container">
                   <label>
                     <span class="visually-hidden">Фамилия имя отчество</span>
-                    <input id="user-name" name="user-name" type="text" placeholder="ФИО" required="">
+                    <input id="user-name" name="user-name" type="text" placeholder="ФИО" minlength="2" required="">
                   </label>
                   <label>
                     <span class="visually-hidden">Телефон</span>
