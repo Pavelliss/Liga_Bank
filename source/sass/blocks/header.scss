@@ -64,7 +64,7 @@
 }
 
 .header__nav {
-  width: 60%;
+  width: 55%;
   margin-top: 10px;
   margin-left: 33px;
 }
@@ -155,7 +155,7 @@
     &::before {
       @include position-abs(0, 0);
       content: "";
-      width: 100%;
+      width: 16px;
       height: 2px;
 
       background-color: $dark;

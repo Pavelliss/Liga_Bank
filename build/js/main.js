@@ -270,7 +270,7 @@ servisesItems.forEach(function (element) {
 //----------------------------------------------------------
 // CALCULATOR
 (function (){
-  const ERROR_MESSAGE = 'Не коректное значение';
+  const ERROR_MESSAGE = 'Не корректное значение';
   const RESTRICTION = {
     mortgage: {
       cost: {min: 1200000, max: 25000000},
@@ -758,7 +758,7 @@ servisesItems.forEach(function (element) {
     };
 
     for (let i = 0; i < checkboxs.length; i++) {
-      percent = Math.floor((percent - RESTRICTION.auto.checkbox[i]) * 100);
+      percent = (RESTRICTION.auto.checkbox[i]) * 100;
       percent /= 100;
     };
     return percent;
@@ -832,7 +832,6 @@ servisesItems.forEach(function (element) {
 
   function reRenderOffer () {
     window.inputsData = window.calculator.upDateInpusts();
-    console.log(window.inputsData);
     fillOffer();
     window.util.togglePopup(formPopup, false);
   };
@@ -841,6 +840,7 @@ servisesItems.forEach(function (element) {
     evt.preventDefault();
     window.formRequest.fullForm();
     window.util.togglePopup(formPopup, true);
+    window.formRequest.setFocusInput();
   });
 
   window.offer = {
@@ -863,17 +863,18 @@ servisesItems.forEach(function (element) {
   const inputInitial = formPopup.querySelector('#initial-fee');
   const inputTerm = formPopup.querySelector('#loan-term');
   const buttonSubmit = formPopup.querySelector('.form-request__button');
+  const labelInitial = formPopup.querySelector('.form-request__label');
   const popupSuccessfully = window.range.calculatorBlock.querySelector('.popup--successfully');
   const popupButtonClose = popupSuccessfully.querySelector('.popup__button-close');
   const form = window.range.calculatorBlock.querySelector('#form-calculator');
 
-  // from 11, to 0011
+  // from 11, to № 0011
   function converRequestNumber (num) {
     num += '';
     while (num.length < 4) {
       num = '0' + num;
     }
-    return num;
+    return '№ ' + num;
   };
 
   function resetForm () {
@@ -895,9 +896,18 @@ servisesItems.forEach(function (element) {
     }
   };
 
-  function increasesCounter (num) {
-    num = +num;
-    return num += 1;
+  // from № 0011- String, to 11- Number
+  function increasesCounter (value) {
+    if (value.indexOf('№') !== 1) {
+      value = value.split('');
+      value.splice(0, 1);
+      value = value.join('');
+      value = +value;
+      return value += 1;
+    }
+
+    value = +value;
+    return value += 1;
   };
 
   let storage = {
@@ -917,12 +927,23 @@ servisesItems.forEach(function (element) {
     storage.support = false;
   };
 
+  function hidesInitialInput () {
+    let id = window.selectCheckedId;
+
+    if (id === 'consumer') {
+      labelInitial.classList.add('form-request__label--hidden');
+    } else {
+      labelInitial.classList.remove('form-request__label--hidden');
+    }
+  };
+
   function fullForm () {
     let requestNum = increasesCounter(inputCounter.value);
 
+    hidesInitialInput();
     loanPurpose.value = loanPurpose.dataset[window.selectCheckedId];
     spanCost.textContent = spanCost.dataset[window.selectCheckedId];
-    inputCounter.value = '№ ' + converRequestNumber(requestNum);
+    inputCounter.value = converRequestNumber(requestNum);
     inputCost.value = window.calculator.convetBackRubl(window.inputsData.cost);
     inputInitial.value = window.calculator.convetBackRubl(window.inputsData.initial);
     inputTerm.value = window.calculator.convetBackYers(window.inputsData.term);
@@ -937,6 +958,18 @@ servisesItems.forEach(function (element) {
     };
   };
 
+  function setFocusInput () {
+    if (storage.userName) {
+      inputUserEmail.focus();
+    } else if (storage.userEmail) {
+      inputUserPhone.focus();
+    } else if (storage.userPhone) {
+      buttonSubmit.focus();
+    } else {
+      inputUserName.focus();
+    }
+  };
+
   function onButtonSubmit (evt) {
     if (inputUserName.validity.valid
      && inputUserPhone.validity.valid
@@ -945,6 +978,7 @@ servisesItems.forEach(function (element) {
       upDataStorage();
       window.util.togglePopup(formPopup, false);
       window.util.togglePopup(popupSuccessfully, true);
+      window.addEventListener('keydown', onPopupButtonEscPress);
     } else {
       formPopup.classList.remove('popup--form-error');
       formPopup.offsetWidth;
@@ -954,11 +988,11 @@ servisesItems.forEach(function (element) {
 
   buttonSubmit.addEventListener('click', onButtonSubmit);
   popupButtonClose.addEventListener('click', onButtonCloseClick);
-  window.addEventListener('keydown', onPopupButtonEscPress);
 
   window.formRequest = {
     fullForm: fullForm,
     resetForm: resetForm,
+    setFocusInput: setFocusInput,
   };
 }());
 
@@ -1009,8 +1043,8 @@ servisesItems.forEach(function (element) {
       region: 'sng',
     },
     {
-      latitube: 39.79,
-      longitube: 71.72,
+      latitube: 41.31,
+      longitube: 69.28,
       balloonContent: 'Ташкент',
       region: 'sng',
     },

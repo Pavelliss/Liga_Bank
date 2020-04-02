@@ -18,7 +18,7 @@
         <span class="visually-hidden">Открыть, закрыть меню</span>
       </button>
       <div class="header__logo">
-        <a href="#">
+        <a>
           <img src="img/logo.svg" width="149" height="25" alt="Лига Банк">
         </a>
       </div>
@@ -268,7 +268,7 @@
             <div class="form-request">
               <form method="POST" action="#">
                 <p class="calculator__p form-request__p">Шаг 3. Оформление заявки</p>
-                <label>
+                <label class="form-request__num-request">
                   <span class="form-request__span">Номер заявки</span>
                   <input id="request-number" type="text" name="request-number" readonly value="0010">
                 </label>
@@ -280,7 +280,7 @@
                   <span id="span-cost" class="form-request__span" data-mortgage="Стоимость недвижимости" data-auto="Стоимость автомобиля" data-consumer="Сумма кредита"></span>
                   <input id="request-cost" name="cost" type="text" readonly>
                 </label>
-                <label>
+                <label class="form-request__label">
                   <span class="form-request__span">Первоначальный взнос</span>
                   <input id="initial-fee" name="initial fee" type="text" readonly>
                 </label>

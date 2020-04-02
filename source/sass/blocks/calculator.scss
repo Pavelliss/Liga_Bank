@@ -4,7 +4,7 @@
   max-width: 1170px;
   padding: 0 45px;
   margin: 0 auto;
-  margin-bottom: 178px;
+  margin-bottom: 88px;
   margin-top: 96px;
 
   font-family: $roboto;
@@ -25,6 +25,7 @@
 
 .calculator__form {
   width: 51%;
+  min-height: 121px;
 
   form {
     width: 100%;
@@ -143,7 +144,6 @@
   label {
     position: relative;
 
-    width: 100%;
     margin-bottom: 5px;
   }
 
@@ -164,11 +164,12 @@
 
     &:hover,
     &:focus {
-      outline-color: $main-color;
+      border-color: $main-color;
+      outline: none;
     }
 
     &:invalid {
-      background-color: rgba($color: red, $alpha: 0.5);
+      background-color: rgba($color: red, $alpha: 0.3);
     }
   }
 
@@ -325,7 +326,7 @@ input[type="checkbox"]:checked + .calculator__element::before {
 }
 
 .calculator__checkbox {
-  display: block;
+  display: inline-block;
   margin-left: 24px;
   cursor: pointer;
 
@@ -341,11 +342,11 @@ input[type="checkbox"]:checked + .calculator__element::before {
 @media (max-width: $tablet-width) {
   .calculator {
     margin-top: 69px;
-    margin-bottom: 147px;
+    margin-bottom: 70px;
   }
 
   .calculator__select {
-    width: 88%;
+    width: 100%;
   }
 
   .calculator__container {
@@ -376,12 +377,17 @@ input[type="checkbox"]:checked + .calculator__element::before {
 
   .calculator__form {
     width: 100%;
+    min-height: 102px;
+
+    form {
+      position: relative;
+    }
   }
 
   .calculator__offer {
     position: static;
     max-width: 100%;
-    margin-top: 39px;
+    margin-top: 35px;
   }
 
   .calculator__item {
@@ -395,7 +401,7 @@ input[type="checkbox"]:checked + .calculator__element::before {
 @media (max-width: $mobile-width) {
   .calculator {
     margin-top: 53px;
-    margin-bottom: 121px;
+    margin-bottom: 46px;
     padding: 0 15px;
   }
 
@@ -420,10 +426,6 @@ input[type="checkbox"]:checked + .calculator__element::before {
 
     font-size: 22px;
     line-height: 31px;
-  }
-
-  .calculator__select {
-    width: 90%;
   }
 
   .calculator__p {
@@ -469,6 +471,10 @@ input[type="checkbox"]:checked + .calculator__element::before {
   }
 
   .calculator__offer {
-    margin-top: 26px;
+    margin-top: 18px;
+  }
+
+  .calculator__form {
+    min-height: 96px;
   }
 }

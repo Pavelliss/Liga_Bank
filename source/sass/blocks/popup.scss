@@ -44,6 +44,10 @@
       height: 27px;
     }
   }
+
+  &--form-request {
+    margin-bottom: 96px;
+  }
 }
 
 .popup__background {
@@ -175,6 +179,10 @@
     .popup__button-close {
       right: 12.1%;
     }
+  }
+
+  .popup--form-request {
+    margin-bottom: -20px;
   }
 }
 

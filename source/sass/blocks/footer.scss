@@ -65,6 +65,16 @@
 
   a {
     color: $gray--darken;
+    transition-duration: 0.3s;
+
+    &:hover,
+    &:focus {
+      color: $main-color;
+    }
+
+    &:active {
+      opacity: 0.3;
+    }
   }
 }
 
@@ -199,7 +209,7 @@
 
 @media (max-width: $mobile-width) {
   .footer {
-    padding-top: 36px;
+    padding-top: 31px;
     padding-bottom: 40px;
   }
 
