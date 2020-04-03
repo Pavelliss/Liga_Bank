@@ -1105,7 +1105,7 @@ servisesItems.forEach(function (element) {
     map = new ymaps.Map('map', {
       center: [55.16, 41.37],
       zoom: 4,
-      controls: ['smallMapDefaultSet'],
+      controls: [],
     });
 
     let filtredCity = CITYS.filter(function (obj) {
