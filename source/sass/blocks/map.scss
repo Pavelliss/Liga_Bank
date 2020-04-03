@@ -24,7 +24,7 @@
   form {
     display: flex;
     flex-wrap: wrap;
-    width: 300px;
+    width: 350px;
     margin: 0 auto;
 
     font-size: 14px;
@@ -32,8 +32,9 @@
   }
 
   label {
-    margin-left: 43px;
-    margin-right: 14px;
+    margin-left: 54px;
+    margin-right: -13px;
+    padding-left: 15px;
     cursor: pointer;
   }
 }
@@ -126,7 +127,8 @@ input[type="checkbox"]:checked + .map__element::before {
     }
 
     label {
-      margin-right: 4px;
+      margin-right: 2px;
+      margin-left: 29px;
     }
   }
 }

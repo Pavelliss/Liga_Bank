@@ -50,10 +50,10 @@ a {
 
 .body-popup {
   overflow-y: hidden;
-}
-
-.body-popup {
-  -webkit-overflow-scrolling: touch;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  position: fixed;
 }
 
 .nojs {

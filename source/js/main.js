@@ -270,7 +270,7 @@ servisesItems.forEach(function (element) {
 //----------------------------------------------------------
 // CALCULATOR
 (function (){
-  const ERROR_MESSAGE = 'Не корректное значение';
+  const ERROR_MESSAGE = 'Некорректное значение';
   const RESTRICTION = {
     mortgage: {
       cost: {min: 1200000, max: 25000000},
@@ -1105,6 +1105,7 @@ servisesItems.forEach(function (element) {
     map = new ymaps.Map('map', {
       center: [55.16, 41.37],
       zoom: 4,
+      controls: ['smallMapDefaultSet'],
     });
 
     let filtredCity = CITYS.filter(function (obj) {

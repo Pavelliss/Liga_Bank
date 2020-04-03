@@ -305,7 +305,7 @@
 
 .calculator__element {
   &::before {
-    @include position-abs(-1px, -24px);
+    @include position-abs(-1px, -13px);
     content: "";
 
     width: 16px;
@@ -327,7 +327,8 @@ input[type="checkbox"]:checked + .calculator__element::before {
 
 .calculator__checkbox {
   display: inline-block;
-  margin-left: 24px;
+  margin-left: 12px;
+  padding-left: 10px;
   cursor: pointer;
 
   &--hidden {
